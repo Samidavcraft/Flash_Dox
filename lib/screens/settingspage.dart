@@ -25,9 +25,9 @@ class _SettingspageState extends State<Settingspage> {
               width: appsizer.appBarIconSize(),
               height: appsizer.appBarIconSize(),
             ),
-
+            SizedBox(width: 1.w),
             Text(
-              "Converter",
+              "Settings",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: appsizer.appBarTextSize(),

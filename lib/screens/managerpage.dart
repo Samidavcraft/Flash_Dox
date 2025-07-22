@@ -1,5 +1,6 @@
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Managerpage extends StatefulWidget {
   const Managerpage({super.key});
@@ -30,6 +31,7 @@ class _ManagerpageState extends State<Managerpage> {
                 width: appsizer.appBarIconSize(),
                 height: appsizer.appBarIconSize(),
               ),
+              SizedBox(width: 1.w),
               Text(
                 "Manager",
                 style: TextStyle(

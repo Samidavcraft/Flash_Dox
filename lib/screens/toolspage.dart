@@ -32,7 +32,7 @@ class _ToolspageState extends State<Toolspage> {
               width: appsizer.appBarIconSize(),
               height: appsizer.appBarIconSize(),
             ),
-
+            SizedBox(width: 1.w),
             Text(
               "Converter",
               style: TextStyle(
