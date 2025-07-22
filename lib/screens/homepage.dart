@@ -1,5 +1,6 @@
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -36,6 +37,19 @@ class _HomepageState extends State<Homepage> {
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: IconButton(
+        padding: EdgeInsets.only(right: 3.w, bottom: 2.h),
+        color: Colors.white,
+        tooltip: "Camera",
+        onPressed: () {
+          // Camera Module
+          /*
+                  Take Images...
+          */
+        },
+        icon: Icon(Icons.camera_alt_outlined, size: 26.sp),
       ),
     );
   }

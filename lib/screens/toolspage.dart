@@ -148,7 +148,7 @@ class _ToolspageState extends State<Toolspage> {
                         onPressed: () {},
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
-                          padding: EdgeInsets.symmetric(vertical: 1.8.h),
+                          padding: EdgeInsets.symmetric(vertical: 1.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
@@ -239,7 +239,7 @@ class _ToolspageState extends State<Toolspage> {
                     backgroundColor: Colors.grey.shade900,
                     padding: EdgeInsets.symmetric(
                       horizontal: 5.w,
-                      vertical: 1.8.h,
+                      vertical: 1.h,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
@@ -335,7 +335,7 @@ class _ToolspageState extends State<Toolspage> {
                   ),
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: 1.h),
               Padding(
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(
@@ -349,28 +349,39 @@ class _ToolspageState extends State<Toolspage> {
               ),
               SizedBox(height: 1.h),
               SizedBox(
-                width: 100.w,
+                width: double.infinity,
                 height: 50.w,
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 2.w,
-                    mainAxisSpacing: 1.h,
-                  ),
                   itemCount: listviewitems.featureToolsData2["icon"].length,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: 11.w,
-                      height: 14.h,
-                      child: Column(
-                        children: [
-                          listviewitems.featureToolsData2["icon"][index],
-                          Text(listviewitems.featureToolsData2["Desc"][index]),
-                        ],
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.w),
+                      child: SizedBox(
+                        width: 12.w,
+                        height: 25.h,
+                        child: Column(
+                          children: [
+                            listviewitems.featureToolsData2["icon"][index],
+                            Text(
+                              listviewitems.featureToolsData2["Desc"][index],
+                              style: TextStyle(
+                                fontSize: _appWidgetSizer.settingsDescSize(),
+                                color: textcolor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+
+                    mainAxisExtent: 10.h,
+                  ),
                 ),
               ),
             ],

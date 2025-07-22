@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Listviewitems {
   List<String> inputFormatData = [
@@ -29,11 +30,11 @@ class Listviewitems {
 
   Map<String, dynamic> featureToolsData2 = {
     "icon": [
-      Image.asset("assets/pdf.png", width: 40, height: 40),
-      Image.asset("assets/ppt.png", width: 40, height: 40),
-      Image.asset("assets/ms_word.png", width: 40, height: 40),
-      Image.asset("assets/ms_word.png", width: 40, height: 40),
-      Image.asset("assets/ms_word.png", width: 40, height: 40),
+      Image.asset("assets/pdf.png", scale: 4),
+      Image.asset("assets/ppt.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
     ],
 
     "Desc": [
