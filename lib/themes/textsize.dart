@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class AppWidgetSizer {
@@ -28,4 +30,6 @@ class AppWidgetSizer {
   double settingsDescSize() {
     return 13.sp;
   }
+
+  static const greycolor = Color.fromARGB(255, 136, 133, 133);
 }

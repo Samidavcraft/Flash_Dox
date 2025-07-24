@@ -1,7 +1,6 @@
-import 'package:flutter/widgets.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter/material.dart';
 
-class Listviewitems {
+class Listviewitems extends SearchViewListView {
   List<String> inputFormatData = [
     "PDF File",
     "World File",
@@ -40,6 +39,119 @@ class Listviewitems {
     "Desc": [
       "Convert to PDF",
       "Convert to TXT",
+      "Convert to IMG",
+      "Convert to IMG",
+      "Convert to IMG",
+    ],
+  };
+}
+
+class SearchViewListView extends DrawerlistItems {
+  Map<String, dynamic> searchviewData = {
+    "icon": [
+      Image.asset("assets/pdf.png", scale: 4),
+      Image.asset("assets/ppt.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+    ],
+
+    "Title": [
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+      "Excel File in List",
+    ],
+
+    "Desc": [
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+      "Date 06-06-2025",
+    ],
+  };
+}
+
+class DrawerlistItems extends HomeRecentFiles {
+  @override
+  Map<String, dynamic> drawerItems = {
+    "icon": [
+      Icon(Icons.home),
+      Icon(Icons.history),
+      Icon(Icons.folder),
+      Icon(Icons.file_copy),
+      Icon(Icons.recycling),
+      Icon(Icons.settings),
+      Icon(Icons.warning),
+    ],
+
+    "title": [
+      "Home",
+      "Recent Files",
+      "All Files",
+      "Feature Tools",
+      "Trash Bin",
+      "Settings",
+      "About Us",
+    ],
+  };
+}
+
+class HomeRecentFiles {
+  Map<String, dynamic> homeRecentFilesList = {
+    "icon": [
+      Image.asset("assets/pdf.png"),
+      Image.asset("assets/ppt.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/ms_word.png"),
+    ],
+
+    "Desc": [
+      "Convert to PDF",
+      "Convert to TXT",
+      "Convert to IMG",
+      "Convert to IMG",
+      "Convert to IMG",
+      "Convert to IMG",
+      "Convert to IMG",
       "Convert to IMG",
       "Convert to IMG",
       "Convert to IMG",

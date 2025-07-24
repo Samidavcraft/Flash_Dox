@@ -15,7 +15,6 @@ class _ToolspageState extends State<Toolspage> {
 
   String? inputCurrentItem;
   String? outputCurrentItem;
-  static const textcolor = Color.fromARGB(255, 136, 133, 133);
 
   Listviewitems listviewitems = Listviewitems();
   final AppWidgetSizer _appWidgetSizer = AppWidgetSizer();
@@ -80,7 +79,7 @@ class _ToolspageState extends State<Toolspage> {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: textcolor,
+                    color: AppWidgetSizer.greycolor,
                   ),
                 ),
               ),
@@ -91,7 +90,7 @@ class _ToolspageState extends State<Toolspage> {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
-                    color: textcolor,
+                    color: AppWidgetSizer.greycolor,
                   ),
                 ),
               ),
@@ -112,7 +111,10 @@ class _ToolspageState extends State<Toolspage> {
                         child: DropdownButton<String>(
                           hint: Text(
                             "Select Input Format",
-                            style: TextStyle(color: textcolor, fontSize: 15.sp),
+                            style: TextStyle(
+                              color: AppWidgetSizer.greycolor,
+                              fontSize: 15.sp,
+                            ),
                           ),
                           isExpanded: true,
                           iconSize: 20.sp,
@@ -159,14 +161,14 @@ class _ToolspageState extends State<Toolspage> {
                             Text(
                               "Import",
                               style: TextStyle(
-                                color: textcolor,
+                                color: AppWidgetSizer.greycolor,
                                 fontSize: 15.sp,
                               ),
                             ),
                             SizedBox(width: 1.w),
                             Icon(
                               Icons.download_outlined,
-                              color: textcolor,
+                              color: AppWidgetSizer.greycolor,
                               size: 20.sp,
                             ),
                           ],
@@ -187,7 +189,7 @@ class _ToolspageState extends State<Toolspage> {
                   style: TextStyle(
                     fontSize: 17.sp,
                     fontWeight: FontWeight.bold,
-                    color: textcolor,
+                    color: AppWidgetSizer.greycolor,
                   ),
                 ),
               ),
@@ -202,7 +204,10 @@ class _ToolspageState extends State<Toolspage> {
                   child: DropdownButton<String>(
                     hint: Text(
                       "Select Output Format",
-                      style: TextStyle(fontSize: 15.sp, color: textcolor),
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        color: AppWidgetSizer.greycolor,
+                      ),
                     ),
                     isExpanded: true,
                     iconSize: 20.sp,
@@ -250,7 +255,10 @@ class _ToolspageState extends State<Toolspage> {
                     children: [
                       Text(
                         "Convert",
-                        style: TextStyle(color: textcolor, fontSize: 16.sp),
+                        style: TextStyle(
+                          color: AppWidgetSizer.greycolor,
+                          fontSize: 16.sp,
+                        ),
                       ),
                       SizedBox(width: 2.w),
                       const Icon(
@@ -271,7 +279,7 @@ class _ToolspageState extends State<Toolspage> {
                   "Converter Tools",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: textcolor,
+                    color: AppWidgetSizer.greycolor,
                     fontSize: appsizer.textsize(),
                   ),
                 ),
@@ -283,7 +291,7 @@ class _ToolspageState extends State<Toolspage> {
                   "Future Tools",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: textcolor,
+                    color: AppWidgetSizer.greycolor,
                     fontSize: 16.sp,
                   ),
                 ),
@@ -321,7 +329,7 @@ class _ToolspageState extends State<Toolspage> {
                                   style: TextStyle(
                                     fontSize: _appWidgetSizer
                                         .settingsDescSize(),
-                                    color: textcolor,
+                                    color: AppWidgetSizer.greycolor,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   textAlign: TextAlign.center,
@@ -342,7 +350,7 @@ class _ToolspageState extends State<Toolspage> {
                   "Future Tools",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: textcolor,
+                    color: AppWidgetSizer.greycolor,
                     fontSize: 16.sp,
                   ),
                 ),
@@ -367,7 +375,7 @@ class _ToolspageState extends State<Toolspage> {
                               listviewitems.featureToolsData2["Desc"][index],
                               style: TextStyle(
                                 fontSize: _appWidgetSizer.settingsDescSize(),
-                                color: textcolor,
+                                color: AppWidgetSizer.greycolor,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,

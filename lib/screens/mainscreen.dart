@@ -30,7 +30,11 @@ class _MainscreenState extends State<Mainscreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentItem,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+            tooltip: "Home",
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today_outlined),
             label: "Tools",
