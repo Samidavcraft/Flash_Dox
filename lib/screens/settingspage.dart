@@ -35,10 +35,7 @@ class _SettingspageState extends State<Settingspage> {
             ),
           ],
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
+
         actions: [
           IconButton(
             onPressed: () {},

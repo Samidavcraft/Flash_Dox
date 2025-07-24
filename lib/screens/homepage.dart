@@ -18,23 +18,26 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              'assets/flash_icon.png',
-              width: appBar.appBarIconSize(),
-              height: appBar.appBarIconSize(),
-            ),
-            SizedBox(width: 1.w),
-            Text(
-              "Flash Dox",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: appBar.appBarTextSize(),
+        title: Container(
+          margin: EdgeInsets.only(left: 3.w),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/flash_icon.png',
+                width: appBar.appBarIconSize(),
+                height: appBar.appBarIconSize(),
               ),
-            ),
-          ],
+              SizedBox(width: 1.w),
+              Text(
+                "Flash Dox",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: appBar.appBarTextSize(),
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_rounded)),
@@ -325,25 +328,41 @@ class _HomepageState extends State<Homepage> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.w),
-                        child: SizedBox(
-                          width: 17.w,
-                          height: 25.h,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              listviewitems.homeRecentFilesList["icon"][index],
-
-                              Text(
-                                listviewitems
-                                    .homeRecentFilesList["Desc"][index],
-                                style: TextStyle(
-                                  fontSize: appBar.settingsDescSize(),
-                                  color: AppWidgetSizer.greycolor,
-                                  fontWeight: FontWeight.bold,
+                        child: InkWell(
+                          onTap: () {
+                            // for testing
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(milliseconds: 2000),
+                                backgroundColor: Colors.black,
+                                content: Text(
+                                  "Clicked ${listviewitems.homeFolderList["title"][index]}",
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ],
+                            );
+                          },
+                          child: SizedBox(
+                            width: 17.w,
+
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                listviewitems
+                                    .homeRecentFilesList["icon"][index],
+
+                                Text(
+                                  listviewitems
+                                      .homeRecentFilesList["Desc"][index],
+                                  style: TextStyle(
+                                    fontSize: appBar.settingsDescSize(),
+                                    color: AppWidgetSizer.greycolor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -356,7 +375,7 @@ class _HomepageState extends State<Homepage> {
             Container(
               margin: EdgeInsets.only(left: 5.w, top: 1.h),
               child: Text(
-                "Folder",
+                "Folders",
                 style: TextStyle(
                   fontSize: appBar.settingsTitleSize(),
                   fontWeight: FontWeight.bold,
@@ -366,50 +385,55 @@ class _HomepageState extends State<Homepage> {
             SizedBox(height: 1.h),
             SizedBox(
               width: double.infinity,
-              height: 50.h,
+              height: 50.w,
               child: GridView.builder(
                 itemCount: listviewitems.homeFolderList["icon"].length,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
-                    child: SizedBox(
-                      width: 12.w,
-                      height: 25.h,
-                      child: GridTile(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            listviewitems.homeFolderList["icon"][index],
-                            SizedBox(height: 1.h),
-                            Text(
-                              listviewitems.homeFolderList["title"][index],
-                              style: TextStyle(
-                                fontSize: appBar.settingsDescSize(),
-                                color: AppWidgetSizer.greycolor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              listviewitems.homeFolderList["desc"][index],
-                              style: TextStyle(
-                                fontSize: appBar.settingsDescSize(),
-                                color: AppWidgetSizer.greycolor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                  return InkWell(
+                    onTap: () {
+                      // for testing
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(milliseconds: 2000),
+                          backgroundColor: Colors.black,
+                          content: Text(
+                            "Clicked ${listviewitems.homeFolderList["title"][index]}",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        listviewitems.homeFolderList["icon"][index],
+                        Text(
+                          listviewitems.homeFolderList["title"][index],
+                          style: TextStyle(
+                            fontSize: appBar.settingsDescSize(),
+                            color: AppWidgetSizer.greycolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          listviewitems.homeFolderList["desc"][index],
+                          style: TextStyle(
+                            fontSize: appBar.settingsDescSize(),
+                            color: AppWidgetSizer.greycolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   );
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-
-                  mainAxisExtent: 10.h,
+                  crossAxisSpacing: 1.w,
+                  mainAxisSpacing: 2.h,
+                  mainAxisExtent: 9.h,
                 ),
               ),
             ),

@@ -24,27 +24,27 @@ class _ToolspageState extends State<Toolspage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Row(
-          children: [
-            Image.asset(
-              'assets/flash_icon.png',
-              width: appsizer.appBarIconSize(),
-              height: appsizer.appBarIconSize(),
-            ),
-            SizedBox(width: 1.w),
-            Text(
-              "Converter",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: appsizer.appBarTextSize(),
+        title: Container(
+          margin: EdgeInsets.only(left: 3.w),
+          child: Row(
+            children: [
+              Image.asset(
+                'assets/flash_icon.png',
+                width: appsizer.appBarIconSize(),
+                height: appsizer.appBarIconSize(),
               ),
-            ),
-          ],
+              SizedBox(width: 1.w),
+              Text(
+                "Converter",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: appsizer.appBarTextSize(),
+                ),
+              ),
+            ],
+          ),
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
+
         actions: [
           IconButton(
             onPressed: () {

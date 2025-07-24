@@ -1,3 +1,4 @@
+import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -11,35 +12,37 @@ class Managerpage extends StatefulWidget {
 
 class _ManagerpageState extends State<Managerpage> {
   final AppWidgetSizer appsizer = AppWidgetSizer();
-  Map<String, dynamic> tabsItems = {
-    "texts": ["Home", "Settings", "Example"],
-    "icons": [Icon(Icons.home), Icon(Icons.settings), Icon(Icons.abc)],
-  };
+  Listviewitems listviewitems = Listviewitems();
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: tabsItems.length,
+      length: 9,
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios_new_sharp),
-
-          title: Row(
-            children: [
-              Image.asset(
-                'assets/flash_icon.png',
-                width: appsizer.appBarIconSize(),
-                height: appsizer.appBarIconSize(),
-              ),
-              SizedBox(width: 1.w),
-              Text(
-                "Manager",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: appsizer.appBarTextSize(),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+          ],
+          title: Container(
+            margin: EdgeInsets.only(left: 3.w),
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/flash_icon.png',
+                  width: appsizer.appBarIconSize(),
+                  height: appsizer.appBarIconSize(),
                 ),
-              ),
-            ],
+                SizedBox(width: 1.w),
+                Text(
+                  "Manager",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: appsizer.appBarTextSize(),
+                  ),
+                ),
+              ],
+            ),
           ),
           bottom: TabBar(
             dividerHeight: 0.1,
