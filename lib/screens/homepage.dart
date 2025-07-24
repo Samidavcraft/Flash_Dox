@@ -223,20 +223,41 @@ class _HomepageState extends State<Homepage> {
                                           .searchviewData["icon"]
                                           .length,
                                       itemBuilder: (context, index) {
-                                        return ListTile(
-                                          leading: listviewitems
-                                              .searchviewData["icon"][index],
-                                          title: Text(
-                                            listviewitems
-                                                .searchviewData["Title"][index],
-                                          ),
-                                          subtitle: Text(
-                                            listviewitems
-                                                .searchviewData["Desc"][index],
-                                          ),
-                                          trailing: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(Icons.more_vert),
+                                        return InkWell(
+                                          onTap: () {
+                                            // for Testing
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                duration: Duration(
+                                                  milliseconds: 2000,
+                                                ),
+                                                backgroundColor: Colors.black,
+                                                content: Text(
+                                                  "Clicked ${listviewitems.searchviewData["Title"][index]}",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: ListTile(
+                                            leading: listviewitems
+                                                .searchviewData["icon"][index],
+                                            title: Text(
+                                              listviewitems
+                                                  .searchviewData["Title"][index],
+                                            ),
+                                            subtitle: Text(
+                                              listviewitems
+                                                  .searchviewData["Desc"][index],
+                                            ),
+                                            trailing: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(Icons.more_vert),
+                                            ),
                                           ),
                                         );
                                       },
@@ -333,12 +354,62 @@ class _HomepageState extends State<Homepage> {
             ),
             Divider(height: 1.h),
             Container(
-              margin: EdgeInsets.only(left: 5.w),
+              margin: EdgeInsets.only(left: 5.w, top: 1.h),
               child: Text(
                 "Folder",
                 style: TextStyle(
                   fontSize: appBar.settingsTitleSize(),
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 1.h),
+            SizedBox(
+              width: double.infinity,
+              height: 50.h,
+              child: GridView.builder(
+                itemCount: listviewitems.homeFolderList["icon"].length,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: SizedBox(
+                      width: 12.w,
+                      height: 25.h,
+                      child: GridTile(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            listviewitems.homeFolderList["icon"][index],
+                            SizedBox(height: 1.h),
+                            Text(
+                              listviewitems.homeFolderList["title"][index],
+                              style: TextStyle(
+                                fontSize: appBar.settingsDescSize(),
+                                color: AppWidgetSizer.greycolor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              listviewitems.homeFolderList["desc"][index],
+                              style: TextStyle(
+                                fontSize: appBar.settingsDescSize(),
+                                color: AppWidgetSizer.greycolor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+
+                  mainAxisExtent: 10.h,
                 ),
               ),
             ),

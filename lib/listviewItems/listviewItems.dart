@@ -105,7 +105,6 @@ class SearchViewListView extends DrawerlistItems {
 }
 
 class DrawerlistItems extends HomeRecentFiles {
-  @override
   Map<String, dynamic> drawerItems = {
     "icon": [
       Icon(Icons.home),
@@ -129,7 +128,7 @@ class DrawerlistItems extends HomeRecentFiles {
   };
 }
 
-class HomeRecentFiles {
+class HomeRecentFiles extends HomeFolderList {
   Map<String, dynamic> homeRecentFilesList = {
     "icon": [
       Image.asset("assets/pdf.png"),
@@ -156,5 +155,16 @@ class HomeRecentFiles {
       "Convert to IMG",
       "Convert to IMG",
     ],
+  };
+}
+
+class HomeFolderList {
+  Map<String, dynamic> homeFolderList = {
+    "icon": [
+      Image.asset("assets/word_files.png", scale: 4),
+      Image.asset("assets/pdf_files.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+    ],
+    "Desc": ["Convert to PDF", "Convert to TXT", "Convert to IMG"],
   };
 }
