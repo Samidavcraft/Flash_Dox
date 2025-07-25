@@ -171,35 +171,32 @@ class _ToolspageState extends State<Toolspage> {
                           });
                           print("Image is picked");
 
-                          SizedBox(
-                            width: double.infinity,
-                            child: await showModalBottomSheet(
-                              context: context.mounted ? context : context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: EdgeInsets.all(5.w),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(2.w),
-                                        decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.circular(
-                                            10,
-                                          ),
-                                        ),
-                                        width: 25.w,
-                                        height: 15.h,
-                                        child: Image.file(
-                                          File(file!.path),
-                                          fit: BoxFit.cover,
-                                        ),
+                          await showModalBottomSheet(
+                            context: context.mounted ? context : context,
+                            builder: (context) {
+                              return Container(
+                                width: double.infinity,
+
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(2.w),
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                                      width: 25.w,
+                                      height: 15.h,
+                                      child: Image.file(
+                                        File(file!.path),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           );
                         },
                         style: TextButton.styleFrom(
