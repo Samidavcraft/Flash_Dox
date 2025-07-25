@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';

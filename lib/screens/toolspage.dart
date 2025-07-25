@@ -174,7 +174,7 @@ class _ToolspageState extends State<Toolspage> {
                           await showModalBottomSheet(
                             context: context.mounted ? context : context,
                             builder: (context) {
-                              return Container(
+                              return SizedBox(
                                 width: double.infinity,
 
                                 child: Column(

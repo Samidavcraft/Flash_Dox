@@ -158,30 +158,15 @@ class HomeRecentFiles extends HomeFolderList {
   };
 }
 
-class HomeFolderList extends ManagerTabsItems {
+class HomeFolderList {
   Map<String, dynamic> homeFolderList = {
     "icon": [
       Image.asset("assets/word_files.png", scale: 4),
       Image.asset("assets/pdf_files.png", scale: 4),
-      Image.asset("assets/favourite_files.png", scale: 4),
-      Image.asset("assets/ppt_files.png", scale: 4),
-      Image.asset("assets/scaned_files.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
     ],
+    "title": ["Convert to PDF", "Convert to TXT", "Convert to IMG"],
 
-    "title": [
-      "Word Files",
-      "PDF Files",
-      "Favourite Files",
-      "PPT Files",
-      "Scaned Files",
-    ],
-    "desc": ["110 files", "110 files", "110 files", "110 files", "110 files"],
-  };
-}
-
-class ManagerTabsItems {
-  Map<String, dynamic> tabsItems = {
-    "texts": ["Home", "Settings", "Example"],
-    "icons": [Icon(Icons.home), Icon(Icons.settings), Icon(Icons.abc)],
+    "desc": ["Convert to PDF", "Convert to TXT", "Convert to IMG"],
   };
 }
