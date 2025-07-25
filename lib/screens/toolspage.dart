@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Toolspage extends StatefulWidget {
@@ -13,11 +16,21 @@ class Toolspage extends StatefulWidget {
 class _ToolspageState extends State<Toolspage> {
   final AppWidgetSizer appsizer = AppWidgetSizer();
 
+  // input DropdownButton
   String? inputCurrentItem;
+  // output DropdownButton
   String? outputCurrentItem;
 
+  // listview for DropDownButton and Future ListView
   Listviewitems listviewitems = Listviewitems();
+  // for Icon Size and Text Font Size
   final AppWidgetSizer _appWidgetSizer = AppWidgetSizer();
+
+  // for Image Picker
+  ImagePicker imagePicker = ImagePicker();
+
+  // for path
+  XFile? file;
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +160,48 @@ class _ToolspageState extends State<Toolspage> {
                       flex: 2,
 
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          // for Image/File Pick
+
+                          final XFile? photo = await imagePicker.pickImage(
+                            source: ImageSource.gallery,
+                          );
+                          setState(() {
+                            file = photo;
+                          });
+                          print("Image is picked");
+
+                          SizedBox(
+                            width: double.infinity,
+                            child: await showModalBottomSheet(
+                              context: context.mounted ? context : context,
+                              builder: (context) {
+                                return Padding(
+                                  padding: EdgeInsets.all(5.w),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.all(2.w),
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                        ),
+                                        width: 25.w,
+                                        height: 15.h,
+                                        child: Image.file(
+                                          File(file!.path),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
                           padding: EdgeInsets.symmetric(vertical: 1.h),
