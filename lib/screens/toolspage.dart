@@ -189,69 +189,105 @@ class _ToolspageState extends State<Toolspage> {
                             scannedText = result;
                           });
 
-                          // Start detection
-
-                          // Once done, update the UI
-
-                          // await showModalBottomSheet(
-                          //   context: context.mounted ? context : context,
-                          //   builder: (context) {
-                          //     return SizedBox(
-                          //       width: double.infinity,
-                          //       height: 20.h,
-                          //       child: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-
-                          //         children: [
-                          //           Container(
-                          //             margin: EdgeInsets.only(top: 2.h),
-                          //             child: Row(
-                          //               mainAxisAlignment:
-                          //                   MainAxisAlignment.center,
-                          //               children: [
-                          //                 Text(
-                          //                   "Your Image",
-                          //                   style: TextStyle(
-                          //                     fontSize: appsizer
-                          //                         .settingsTitleSize(),
-                          //                   ),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-
-                          //           Container(
-                          //             margin: EdgeInsets.all(5.w),
-                          //             decoration: BoxDecoration(
-                          //               color: Colors.grey,
-                          //               borderRadius: BorderRadius.circular(15),
-                          //             ),
-                          //             width: 25.w,
-                          //             height: 10.h,
-                          //             child: file == null
-                          //                 ? Center(
-                          //                     child: Text(
-                          //                       "Image not Picked",
-                          //                       style: TextStyle(
-                          //                         fontSize: appsizer
-                          //                             .settingsDescSize(),
-                          //                         fontWeight: FontWeight.bold,
-                          //                       ),
-                          //                     ),
-                          //                   )
-                          //                 : Padding(
-                          //                     padding: EdgeInsets.all(1.w),
-                          //                     child: Image.file(
-                          //                       File(file!.path),
-                          //                       fit: BoxFit.cover,
-                          //                     ),
-                          //                   ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     );
-                          //   },
-                          // );
+                          // Open the bottom sheet only after text detection is complete
+                          await showModalBottomSheet(
+                            context: context.mounted ? context : context,
+                            builder: (context) {
+                              return SizedBox(
+                                width: double.infinity,
+                                height: 20.h,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 2.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Your Input Image",
+                                            style: TextStyle(
+                                              fontSize: appsizer
+                                                  .settingsTitleSize(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.all(5.w),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius: BorderRadius.circular(
+                                              15,
+                                            ),
+                                          ),
+                                          width: 25.w,
+                                          height: 10.h,
+                                          child: file == null
+                                              ? Center(
+                                                  child: Text(
+                                                    "Image not Picked",
+                                                    style: TextStyle(
+                                                      fontSize: appsizer
+                                                          .settingsDescSize(),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                )
+                                              : Padding(
+                                                  padding: EdgeInsets.all(1.w),
+                                                  child: Image.file(
+                                                    File(file!.path),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          margin: EdgeInsets.only(right: 3.w),
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                    255,
+                                                    114,
+                                                    112,
+                                                    112,
+                                                  ),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(3),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              // for testing close Bottom Sheet
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "Confirm",
+                                              style: TextStyle(
+                                                fontSize: appsizer
+                                                    .settingsTitleSize(),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
@@ -344,7 +380,44 @@ class _ToolspageState extends State<Toolspage> {
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.only(right: 4.w),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // for convert Files
+
+                    if (inputCurrentItem == "IMG'S" &&
+                        outputCurrentItem == "Excel File") {
+                      // covert here image to excel
+                    } else if (inputCurrentItem == "IMG'S" &&
+                        outputCurrentItem == "PDF File") {
+                      // convert here image to pdf
+                    } else if (inputCurrentItem == "IMG'S" &&
+                        outputCurrentItem == "Word File") {
+                      // image to Word
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Please Select input and output",
+                            style: TextStyle(
+                              fontSize: appsizer.settingsDescSize(),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          duration: Duration(milliseconds: 2000),
+                          backgroundColor: Colors.black,
+                          action: SnackBarAction(
+                            label: "Ok",
+                            textColor: Colors.white,
+                            onPressed: () {
+                              ScaffoldMessenger.of(
+                                context,
+                              ).hideCurrentSnackBar();
+                            },
+                          ),
+                        ),
+                      );
+                    }
+                  },
 
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.grey.shade900,
