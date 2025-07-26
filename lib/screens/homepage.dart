@@ -59,15 +59,15 @@ class _HomepageState extends State<Homepage> {
           tooltip: "Camera",
           onPressed: () {
             showModalBottomSheet(
+              useSafeArea: true,
               isScrollControlled: true,
-              context: (context),
+              context: context,
               builder: (context) {
                 return Scaffold(
                   appBar: AppBar(
                     title: Container(
-                      margin: EdgeInsets.only(left: 3.w),
+                      margin: EdgeInsets.only(left: 4.w),
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset(
                             'assets/flash_icon.png',
@@ -80,6 +80,7 @@ class _HomepageState extends State<Homepage> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: appBar.appBarTextSize(),
+                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -94,38 +95,6 @@ class _HomepageState extends State<Homepage> {
                     actions: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.flash_on)),
                       IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
-                    ],
-                  ),
-                  body: Column(
-                    children: [
-                      // for testing
-                      /*
-                      Container(
-                        width: double.infinity,
-                        height: 400,
-                        color: Colors.grey,
-                        child: Center(
-                          child: file == null
-                              ? Text("Image not Picked")
-                              : Image.file(File(file!.path)),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final XFile? photo = await imagePicker.pickImage(
-                            source: ImageSource.gallery,
-                          );
-                          setState(() {
-                            file = photo;
-                          });
-                          print("Image is Picked");
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateColor.transparent,
-                        ),
-                        child: Text("Pick Image"),
-                      ),
-                      */
                     ],
                   ),
                 );
@@ -239,6 +208,7 @@ class _HomepageState extends State<Homepage> {
                     child: GestureDetector(
                       onTap: () {
                         showModalBottomSheet(
+                          useSafeArea: true,
                           isScrollControlled: true,
                           backgroundColor: Colors.white,
                           shape: BeveledRectangleBorder(
@@ -246,105 +216,100 @@ class _HomepageState extends State<Homepage> {
                           ),
                           context: (context),
                           builder: (BuildContext context) {
-                            return SafeArea(
-                              child: Scaffold(
-                                appBar: AppBar(
-                                  leading: IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: Icon(Icons.close),
-                                  ),
-                                  toolbarHeight: 10.h,
-                                  title: SizedBox(
-                                    height: 4.h,
-                                    width: double.infinity,
-                                    child: TextFormField(
-                                      style: TextStyle(
-                                        fontSize: appBar.settingsTitleSize(),
-                                      ),
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius: BorderRadius.circular(
-                                            5,
-                                          ),
-                                        ),
-                                        fillColor: Colors.grey,
-                                        contentPadding: EdgeInsets.only(
-                                          top: 1.h,
-                                          left: 2.w,
-                                        ),
-                                        filled: true,
-                                        hint: Text(
-                                          "Search Here",
-                                          style: TextStyle(
-                                            fontSize: appBar
-                                                .settingsTitleSize(),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  actions: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.more_vert),
-                                    ),
-                                  ],
+                            return Scaffold(
+                              appBar: AppBar(
+                                leading: IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(Icons.close),
                                 ),
-                                body: Column(
-                                  children: [
-                                    Divider(height: 1.h),
+                                toolbarHeight: 7.h,
+                                title: SizedBox(
+                                  height: 4.h,
+                                  width: double.infinity,
+                                  child: TextFormField(
+                                    style: TextStyle(
+                                      fontSize: appBar.settingsTitleSize(),
+                                    ),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      fillColor: Colors.grey,
+                                      contentPadding: EdgeInsets.only(
+                                        top: 1.h,
+                                        left: 2.w,
+                                      ),
+                                      filled: true,
+                                      hint: Text(
+                                        "Search Here",
+                                        style: TextStyle(
+                                          fontSize: appBar.settingsTitleSize(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                actions: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.more_vert),
+                                  ),
+                                ],
+                              ),
+                              body: Column(
+                                children: [
+                                  Divider(height: 1.h),
 
-                                    Expanded(
-                                      child: ListView.builder(
-                                        itemCount: listviewitems
-                                            .searchviewData["icon"]
-                                            .length,
-                                        itemBuilder: (context, index) {
-                                          return InkWell(
-                                            onTap: () {
-                                              // for Testing
-                                              ScaffoldMessenger.of(
-                                                context,
-                                              ).showSnackBar(
-                                                SnackBar(
-                                                  duration: Duration(
-                                                    milliseconds: 2000,
-                                                  ),
-                                                  backgroundColor: Colors.black,
-                                                  content: Text(
-                                                    "Clicked ${listviewitems.searchviewData["Title"][index]}",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                    ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: listviewitems
+                                          .searchviewData["icon"]
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {
+                                            // for Testing
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                duration: Duration(
+                                                  milliseconds: 2000,
+                                                ),
+                                                backgroundColor: Colors.black,
+                                                content: Text(
+                                                  "Clicked ${listviewitems.searchviewData["Title"][index]}",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
                                                   ),
                                                 ),
-                                              );
-                                            },
-                                            child: ListTile(
-                                              leading: listviewitems
-                                                  .searchviewData["icon"][index],
-                                              title: Text(
-                                                listviewitems
-                                                    .searchviewData["Title"][index],
                                               ),
-                                              subtitle: Text(
-                                                listviewitems
-                                                    .searchviewData["Desc"][index],
-                                              ),
-                                              trailing: IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.more_vert),
-                                              ),
+                                            );
+                                          },
+                                          child: ListTile(
+                                            leading: listviewitems
+                                                .searchviewData["icon"][index],
+                                            title: Text(
+                                              listviewitems
+                                                  .searchviewData["Title"][index],
                                             ),
-                                          );
-                                        },
-                                      ),
+                                            subtitle: Text(
+                                              listviewitems
+                                                  .searchviewData["Desc"][index],
+                                            ),
+                                            trailing: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(Icons.more_vert),
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             );
                           },
@@ -468,8 +433,8 @@ class _HomepageState extends State<Homepage> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 1.w,
-                  mainAxisSpacing: 2.h,
-                  mainAxisExtent: 10.h,
+
+                  mainAxisExtent: 12.h,
                 ),
                 itemCount: listviewitems.homeFolderList["icon"].length,
                 physics: NeverScrollableScrollPhysics(),

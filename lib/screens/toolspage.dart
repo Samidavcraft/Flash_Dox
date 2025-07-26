@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:all_example/listviewItems/listviewItems.dart';
+import 'package:all_example/model/excel.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -31,6 +33,20 @@ class _ToolspageState extends State<Toolspage> {
 
   // for path
   XFile? file;
+
+  // for Text Detector
+  final textRecognizer = GoogleMlKit.vision.textRecognizer();
+
+  // excel convertor
+  ExcelConverter excelConverter = ExcelConverter();
+
+  Future<RecognizedText?> recognizeTextFromFile() async {
+    if (file == null) return null;
+    final inputImage = InputImage.fromFile(File(file!.path));
+    final recognisedText = await textRecognizer.processImage(inputImage);
+    await textRecognizer.close(); // Close after use
+    return recognisedText;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,33 +187,85 @@ class _ToolspageState extends State<Toolspage> {
                           });
                           print("Image is picked");
 
-                          await showModalBottomSheet(
-                            context: context.mounted ? context : context,
-                            builder: (context) {
-                              return SizedBox(
-                                width: double.infinity,
+                          if (inputCurrentItem == "IMG'S" &&
+                              outputCurrentItem == "Excel File") {
+                            final inputImage = InputImage.fromFile(
+                              File(file!.path),
+                            );
+                            final recognizedText = await textRecognizer
+                                .processImage(inputImage);
+                            await textRecognizer.close();
 
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.all(2.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      width: 25.w,
-                                      height: 15.h,
-                                      child: Image.file(
-                                        File(file!.path),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ],
+                            if (recognizedText.text.trim().isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("⚠️ No text found in image"),
                                 ),
                               );
-                            },
-                          );
+                              return;
+                            }
+
+                            await excelConverter.convertTextToExcel(
+                              recognizedText.text,
+                            );
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("✅ Image converted to Excel"),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "⚠️ Please select valid input/output",
+                                ),
+                              ),
+                            );
+                          }
+
+                          // await showModalBottomSheet(
+                          //   context: context.mounted ? context : context,
+                          //   builder: (context) {
+                          //     return SizedBox(
+                          //       width: double.infinity,
+                          //       height: 20.h,
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.start,
+
+                          //         children: [
+                          //           Container(
+                          //             margin: EdgeInsets.all(5.w),
+                          //             decoration: BoxDecoration(
+                          //               color: Colors.grey,
+                          //               borderRadius: BorderRadius.circular(15),
+                          //             ),
+                          //             width: 25.w,
+                          //             height: 10.h,
+                          //             child: file == null
+                          //                 ? Center(
+                          //                     child: Text(
+                          //                       "Image not Picked",
+                          //                       style: TextStyle(
+                          //                         fontSize: appsizer
+                          //                             .settingsDescSize(),
+                          //                         fontWeight: FontWeight.bold,
+                          //                       ),
+                          //                     ),
+                          //                   )
+                          //                 : Padding(
+                          //                     padding: EdgeInsets.all(1.w),
+                          //                     child: Image.file(
+                          //                       File(file!.path),
+                          //                       fit: BoxFit.cover,
+                          //                     ),
+                          //                   ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     );
+                          //   },
+                          // );
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
@@ -290,7 +358,42 @@ class _ToolspageState extends State<Toolspage> {
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.only(right: 4.w),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (file == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("⚠️ Please pick an image first"),
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (inputCurrentItem == "Image" &&
+                        outputCurrentItem == "Excel") {
+                      // Step 1: OCR
+                      final recognizedText = await recognizeTextFromFile();
+                      if (recognizedText == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("❌ Failed to recognize text"),
+                          ),
+                        );
+                        return;
+                      }
+
+                      // Step 2: Save to Excel
+                      await excelConverter.convertTextToExcel(
+                        recognizedText.text,
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("⚠️ Conversion not supported yet"),
+                        ),
+                      );
+                    }
+                  },
+
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.grey.shade900,
                     padding: EdgeInsets.symmetric(

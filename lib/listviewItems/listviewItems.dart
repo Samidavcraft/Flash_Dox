@@ -163,10 +163,18 @@ class HomeFolderList {
     "icon": [
       Image.asset("assets/word_files.png", scale: 4),
       Image.asset("assets/pdf_files.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ppt_files.png", scale: 4),
+      Image.asset("assets/scaned_files.png", scale: 4),
+      Image.asset("assets/favourite_files.png", scale: 4),
     ],
-    "title": ["Convert to PDF", "Convert to TXT", "Convert to IMG"],
+    "title": [
+      "Word File",
+      "PDF File",
+      "PPT File",
+      "Scanned File",
+      "Favourite File",
+    ],
 
-    "desc": ["Convert to PDF", "Convert to TXT", "Convert to IMG"],
+    "desc": ["100 Files", "100 Files", "100 Files", "100 Files", "100 Files"],
   };
 }
