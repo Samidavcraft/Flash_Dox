@@ -176,80 +176,82 @@ class _ToolspageState extends State<Toolspage> {
                             source: ImageSource.gallery,
                           );
 
+                          if (photo == null) {
+                            print("No Image Selected");
+                            return;
+                          }
+
+                          final result = await textDetectorHelper
+                              .getRecognizedText(photo);
+
                           setState(() {
-                            if (photo == null) {
-                              print("No Image Select");
-                            } else {
-                              print("Image Select");
-
-                              file = photo;
-                            }
+                            file = photo;
+                            scannedText = result;
                           });
-                          final result = textDetectorHelper.getRecognizedText(
-                            photo!,
-                          );
 
-                          scannedText = await result;
+                          // Start detection
 
-                          await showModalBottomSheet(
-                            context: context.mounted ? context : context,
-                            builder: (context) {
-                              return SizedBox(
-                                width: double.infinity,
-                                height: 20.h,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          // Once done, update the UI
 
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 2.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Your Image",
-                                            style: TextStyle(
-                                              fontSize: appsizer
-                                                  .settingsTitleSize(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                          // await showModalBottomSheet(
+                          //   context: context.mounted ? context : context,
+                          //   builder: (context) {
+                          //     return SizedBox(
+                          //       width: double.infinity,
+                          //       height: 20.h,
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.start,
 
-                                    Container(
-                                      margin: EdgeInsets.all(5.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      width: 25.w,
-                                      height: 10.h,
-                                      child: file == null
-                                          ? Center(
-                                              child: Text(
-                                                "Image not Picked",
-                                                style: TextStyle(
-                                                  fontSize: appsizer
-                                                      .settingsDescSize(),
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            )
-                                          : Padding(
-                                              padding: EdgeInsets.all(1.w),
-                                              child: Image.file(
-                                                File(file!.path),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
+                          //         children: [
+                          //           Container(
+                          //             margin: EdgeInsets.only(top: 2.h),
+                          //             child: Row(
+                          //               mainAxisAlignment:
+                          //                   MainAxisAlignment.center,
+                          //               children: [
+                          //                 Text(
+                          //                   "Your Image",
+                          //                   style: TextStyle(
+                          //                     fontSize: appsizer
+                          //                         .settingsTitleSize(),
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ),
+
+                          //           Container(
+                          //             margin: EdgeInsets.all(5.w),
+                          //             decoration: BoxDecoration(
+                          //               color: Colors.grey,
+                          //               borderRadius: BorderRadius.circular(15),
+                          //             ),
+                          //             width: 25.w,
+                          //             height: 10.h,
+                          //             child: file == null
+                          //                 ? Center(
+                          //                     child: Text(
+                          //                       "Image not Picked",
+                          //                       style: TextStyle(
+                          //                         fontSize: appsizer
+                          //                             .settingsDescSize(),
+                          //                         fontWeight: FontWeight.bold,
+                          //                       ),
+                          //                     ),
+                          //                   )
+                          //                 : Padding(
+                          //                     padding: EdgeInsets.all(1.w),
+                          //                     child: Image.file(
+                          //                       File(file!.path),
+                          //                       fit: BoxFit.cover,
+                          //                     ),
+                          //                   ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     );
+                          //   },
+                          // );
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
