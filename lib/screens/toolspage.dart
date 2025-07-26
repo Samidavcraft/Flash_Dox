@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:all_example/helper/excelhelper.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/helper/textDectector.dart';
 
@@ -37,10 +38,12 @@ class _ToolspageState extends State<Toolspage> {
 
   // for Scanned Text
   String scannedText = "";
-  bool isScanning = true;
 
   // text Detector Helper
   TextDetectorHelper textDetectorHelper = TextDetectorHelper();
+
+  // Excel Helper
+  ExcelHelper excelHelper = ExcelHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -171,89 +174,80 @@ class _ToolspageState extends State<Toolspage> {
 
                       child: TextButton(
                         onPressed: () async {
-                          // Pick image from gallery
                           final XFile? photo = await imagePicker.pickImage(
                             source: ImageSource.gallery,
+                            preferredCameraDevice: CameraDevice.rear,
                           );
 
-                          if (photo == null) {
-                            print("No image selected");
-                            return;
-                          }
-
-                          setState(() {
-                            isScanning = true;
-                            file = photo;
-                          });
-
-                          // Perform text recognition
                           final result = await textDetectorHelper
-                              .getRecognizedText(photo);
+                              .getRecognizedText(photo!);
 
                           setState(() {
+                            file = photo;
                             scannedText = result;
-                            isScanning = false;
                           });
 
-                          // Show bottom sheet with image preview
-                          if (!context.mounted) return;
-                          await showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return SizedBox(
-                                width: double.infinity,
-                                height: 20.h,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 2.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Your Image",
-                                            style: TextStyle(
-                                              fontSize: appsizer
-                                                  .settingsTitleSize(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(5.w),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      width: 25.w,
-                                      height: 10.h,
-                                      child: file == null
-                                          ? Center(
-                                              child: Text(
-                                                "Image not Picked",
-                                                style: TextStyle(
-                                                  fontSize: appsizer
-                                                      .settingsDescSize(),
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            )
-                                          : Padding(
-                                              padding: EdgeInsets.all(1.w),
-                                              child: Image.file(
-                                                File(file!.path),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
+                          print("Image Select $file");
+
+                          // await showModalBottomSheet(
+                          //   context: context.mounted ? context : context,
+                          //   builder: (context) {
+                          //     return SizedBox(
+                          //       width: double.infinity,
+                          //       height: 20.h,
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.start,
+
+                          //         children: [
+                          //           Container(
+                          //             margin: EdgeInsets.only(top: 2.h),
+                          //             child: Row(
+                          //               mainAxisAlignment:
+                          //                   MainAxisAlignment.center,
+                          //               children: [
+                          //                 Text(
+                          //                   "Your Image",
+                          //                   style: TextStyle(
+                          //                     fontSize: appsizer
+                          //                         .settingsTitleSize(),
+                          //                   ),
+                          //                 ),
+                          //               ],
+                          //             ),
+                          //           ),
+
+                          //           Container(
+                          //             margin: EdgeInsets.all(5.w),
+                          //             decoration: BoxDecoration(
+                          //               color: Colors.grey,
+                          //               borderRadius: BorderRadius.circular(15),
+                          //             ),
+                          //             width: 25.w,
+                          //             height: 10.h,
+                          //             child: file == null
+                          //                 ? Center(
+                          //                     child: Text(
+                          //                       "Image not Picked",
+                          //                       style: TextStyle(
+                          //                         fontSize: appsizer
+                          //                             .settingsDescSize(),
+                          //                         fontWeight: FontWeight.bold,
+                          //                       ),
+                          //                     ),
+                          //                   )
+                          //                 : Padding(
+                          //                     padding: EdgeInsets.all(1.w),
+                          //                     child: Image.file(
+                          //                       File(file!.path),
+                          //                       fit: BoxFit.cover,
+                          //                     ),
+                          //                   ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     );
+                          //   },
+                          // );
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
@@ -282,243 +276,228 @@ class _ToolspageState extends State<Toolspage> {
                         ),
                       ),
                     ),
+                  ],
+                ),
+              ),
 
-                    SizedBox(height: 2.h),
+              SizedBox(height: 2.h),
 
-                    /// Output Section
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.w),
-                      child: Text(
-                        "Output",
+              /// Output Section
+              Padding(
+                padding: EdgeInsets.only(left: 4.w),
+                child: Text(
+                  "Output",
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppWidgetSizer.greycolor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade900,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w),
+                  child: DropdownButton<String>(
+                    hint: Text(
+                      "Select Output Format",
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        color: AppWidgetSizer.greycolor,
+                      ),
+                    ),
+                    isExpanded: true,
+                    iconSize: 20.sp,
+                    icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    underline: const SizedBox(),
+                    value: outputCurrentItem,
+                    items: listviewitems.outputFormatData
+                        .map<DropdownMenuItem<String>>((value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          );
+                        })
+                        .toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        outputCurrentItem = value!;
+                      });
+                    },
+                  ),
+                ),
+              ),
+
+              /// Convert Button
+              Container(
+                alignment: Alignment.centerRight,
+                margin: EdgeInsets.only(right: 4.w),
+                child: TextButton(
+                  onPressed: () {},
+
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.grey.shade900,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 5.w,
+                      vertical: 1.h,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Convert",
                         style: TextStyle(
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.bold,
                           color: AppWidgetSizer.greycolor,
+                          fontSize: 16.sp,
                         ),
                       ),
+                      SizedBox(width: 2.w),
+                      const Icon(
+                        Icons.change_circle_rounded,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const Divider(),
+
+              /// Tools List
+              Padding(
+                padding: EdgeInsets.only(left: 4.w, top: 0.5.h),
+                child: Text(
+                  "Converter Tools",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppWidgetSizer.greycolor,
+                    fontSize: appsizer.textsize(),
+                  ),
+                ),
+              ),
+              SizedBox(height: 1.h),
+              Padding(
+                padding: EdgeInsets.only(left: 4.w),
+                child: Text(
+                  "Future Tools",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppWidgetSizer.greycolor,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 1.h),
+
+              SizedBox(
+                width: 100.w,
+                height: 25.w,
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth:
+                          listviewitems.featureToolsData["icon"].length * 25.w,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 4.w,
-                        vertical: 1.h,
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: EdgeInsets.symmetric(horizontal: 2.w),
-                        child: DropdownButton<String>(
-                          hint: Text(
-                            "Select Output Format",
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              color: AppWidgetSizer.greycolor,
-                            ),
-                          ),
-                          isExpanded: true,
-                          iconSize: 20.sp,
-                          icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                          underline: const SizedBox(),
-                          value: outputCurrentItem,
-                          items: listviewitems.outputFormatData
-                              .map<DropdownMenuItem<String>>((value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(fontSize: 16.sp),
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+
+                      itemCount: listviewitems.featureToolsData["icon"].length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          child: SizedBox(
+                            width: 17.w,
+                            height: 25.h,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                listviewitems.featureToolsData["icon"][index],
+
+                                Text(
+                                  listviewitems.featureToolsData["Desc"][index],
+                                  style: TextStyle(
+                                    fontSize: _appWidgetSizer
+                                        .settingsDescSize(),
+                                    color: AppWidgetSizer.greycolor,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                );
-                              })
-                              .toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              outputCurrentItem = value!;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-
-                    /// Convert Button
-                    Container(
-                      alignment: Alignment.centerRight,
-                      margin: EdgeInsets.only(right: 4.w),
-                      child: TextButton(
-                        onPressed: () {},
-
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.grey.shade900,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 5.w,
-                            vertical: 1.h,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Convert",
-                              style: TextStyle(
-                                color: AppWidgetSizer.greycolor,
-                                fontSize: 16.sp,
-                              ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
-                            SizedBox(width: 2.w),
-                            const Icon(
-                              Icons.change_circle_rounded,
-                              color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 1.h),
+              Padding(
+                padding: EdgeInsets.only(left: 4.w),
+                child: Text(
+                  "Future Tools",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppWidgetSizer.greycolor,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+              SizedBox(height: 1.h),
+              SizedBox(
+                width: double.infinity,
+                height: 50.w,
+                child: GridView.builder(
+                  itemCount: listviewitems.featureToolsData2["icon"].length,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.w),
+                      child: SizedBox(
+                        width: 12.w,
+                        height: 25.h,
+                        child: Column(
+                          children: [
+                            listviewitems.featureToolsData2["icon"][index],
+                            Text(
+                              listviewitems.featureToolsData2["Desc"][index],
+                              style: TextStyle(
+                                fontSize: _appWidgetSizer.settingsDescSize(),
+                                color: AppWidgetSizer.greycolor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
                       ),
-                    ),
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
 
-                    const Divider(),
-
-                    /// Tools List
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.w, top: 0.5.h),
-                      child: Text(
-                        "Converter Tools",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppWidgetSizer.greycolor,
-                          fontSize: appsizer.textsize(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 1.h),
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.w),
-                      child: Text(
-                        "Future Tools",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppWidgetSizer.greycolor,
-                          fontSize: 16.sp,
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: 1.h),
-
-                    SizedBox(
-                      width: 100.w,
-                      height: 25.w,
-                      child: Center(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth:
-                                listviewitems.featureToolsData["icon"].length *
-                                25.w,
-                          ),
-                          child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-
-                            itemCount:
-                                listviewitems.featureToolsData["icon"].length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 4.w),
-                                child: SizedBox(
-                                  width: 17.w,
-                                  height: 25.h,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      listviewitems
-                                          .featureToolsData["icon"][index],
-
-                                      Text(
-                                        listviewitems
-                                            .featureToolsData["Desc"][index],
-                                        style: TextStyle(
-                                          fontSize: _appWidgetSizer
-                                              .settingsDescSize(),
-                                          color: AppWidgetSizer.greycolor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 1.h),
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.w),
-                      child: Text(
-                        "Future Tools",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppWidgetSizer.greycolor,
-                          fontSize: 16.sp,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 1.h),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50.w,
-                      child: GridView.builder(
-                        itemCount:
-                            listviewitems.featureToolsData2["icon"].length,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 4.w),
-                            child: SizedBox(
-                              width: 12.w,
-                              height: 25.h,
-                              child: Column(
-                                children: [
-                                  listviewitems
-                                      .featureToolsData2["icon"][index],
-                                  Text(
-                                    listviewitems
-                                        .featureToolsData2["Desc"][index],
-                                    style: TextStyle(
-                                      fontSize: _appWidgetSizer
-                                          .settingsDescSize(),
-                                      color: AppWidgetSizer.greycolor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-
-                          mainAxisExtent: 10.h,
-                        ),
-                      ),
-                    ),
-
-                    // for testing Text Detector
-                    isScanning
-                        ? const CircularProgressIndicator()
-                        : scannedText.isEmpty
-                        ? const Text("Text Not Detected")
-                        : Text(scannedText),
-                  ],
+                    mainAxisExtent: 10.h,
+                  ),
                 ),
               ),
+
+              scannedText.isEmpty
+                  ? Text("Text not Detected")
+                  : Text(scannedText),
             ],
           ),
         ),
