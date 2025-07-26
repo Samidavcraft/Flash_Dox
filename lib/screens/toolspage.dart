@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:all_example/helper/excelhelper.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/helper/textDectector.dart';
@@ -496,7 +494,10 @@ class _ToolspageState extends State<Toolspage> {
               ),
 
               scannedText.isEmpty
-                  ? Text("Text not Detected")
+                  ? Text(
+                      "⚠️ No text was detected in the image.",
+                      style: TextStyle(color: Colors.red),
+                    )
                   : Text(scannedText),
             ],
           ),
