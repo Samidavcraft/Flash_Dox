@@ -1,4 +1,5 @@
-import 'package:all_example/helper/excelhelper.dart';
+import 'dart:io';
+
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/helper/textDectector.dart';
 
@@ -39,9 +40,6 @@ class _ToolspageState extends State<Toolspage> {
 
   // text Detector Helper
   TextDetectorHelper textDetectorHelper = TextDetectorHelper();
-
-  // Excel Helper
-  ExcelHelper excelHelper = ExcelHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -172,80 +170,86 @@ class _ToolspageState extends State<Toolspage> {
 
                       child: TextButton(
                         onPressed: () async {
+                          // for Image/File Pick
+
                           final XFile? photo = await imagePicker.pickImage(
                             source: ImageSource.gallery,
-                            preferredCameraDevice: CameraDevice.rear,
                           );
 
-                          final result = await textDetectorHelper
-                              .getRecognizedText(photo!);
-
                           setState(() {
-                            file = photo;
-                            scannedText = result;
+                            if (photo == null) {
+                              print("No Image Select");
+                            } else {
+                              print("Image Select");
+
+                              file = photo;
+                            }
                           });
+                          final result = textDetectorHelper.getRecognizedText(
+                            photo!,
+                          );
 
-                          print("Image Select $file");
+                          scannedText = await result;
 
-                          // await showModalBottomSheet(
-                          //   context: context.mounted ? context : context,
-                          //   builder: (context) {
-                          //     return SizedBox(
-                          //       width: double.infinity,
-                          //       height: 20.h,
-                          //       child: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
+                          await showModalBottomSheet(
+                            context: context.mounted ? context : context,
+                            builder: (context) {
+                              return SizedBox(
+                                width: double.infinity,
+                                height: 20.h,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
 
-                          //         children: [
-                          //           Container(
-                          //             margin: EdgeInsets.only(top: 2.h),
-                          //             child: Row(
-                          //               mainAxisAlignment:
-                          //                   MainAxisAlignment.center,
-                          //               children: [
-                          //                 Text(
-                          //                   "Your Image",
-                          //                   style: TextStyle(
-                          //                     fontSize: appsizer
-                          //                         .settingsTitleSize(),
-                          //                   ),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 2.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Your Image",
+                                            style: TextStyle(
+                                              fontSize: appsizer
+                                                  .settingsTitleSize(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
 
-                          //           Container(
-                          //             margin: EdgeInsets.all(5.w),
-                          //             decoration: BoxDecoration(
-                          //               color: Colors.grey,
-                          //               borderRadius: BorderRadius.circular(15),
-                          //             ),
-                          //             width: 25.w,
-                          //             height: 10.h,
-                          //             child: file == null
-                          //                 ? Center(
-                          //                     child: Text(
-                          //                       "Image not Picked",
-                          //                       style: TextStyle(
-                          //                         fontSize: appsizer
-                          //                             .settingsDescSize(),
-                          //                         fontWeight: FontWeight.bold,
-                          //                       ),
-                          //                     ),
-                          //                   )
-                          //                 : Padding(
-                          //                     padding: EdgeInsets.all(1.w),
-                          //                     child: Image.file(
-                          //                       File(file!.path),
-                          //                       fit: BoxFit.cover,
-                          //                     ),
-                          //                   ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     );
-                          //   },
-                          // );
+                                    Container(
+                                      margin: EdgeInsets.all(5.w),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      width: 25.w,
+                                      height: 10.h,
+                                      child: file == null
+                                          ? Center(
+                                              child: Text(
+                                                "Image not Picked",
+                                                style: TextStyle(
+                                                  fontSize: appsizer
+                                                      .settingsDescSize(),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            )
+                                          : Padding(
+                                              padding: EdgeInsets.all(1.w),
+                                              child: Image.file(
+                                                File(file!.path),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                         },
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
@@ -493,11 +497,9 @@ class _ToolspageState extends State<Toolspage> {
                 ),
               ),
 
+              // for testing Text Detector
               scannedText.isEmpty
-                  ? Text(
-                      "⚠️ No text was detected in the image.",
-                      style: TextStyle(color: Colors.red),
-                    )
+                  ? const Text("Text Not Detected")
                   : Text(scannedText),
             ],
           ),
