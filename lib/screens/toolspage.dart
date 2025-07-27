@@ -389,7 +389,8 @@ class _ToolspageState extends State<Toolspage> {
                     } else if (inputCurrentItem == "IMG'S" &&
                         outputCurrentItem == "PDF File") {
                       // convert here image to pdf
-                    } else if (inputCurrentItem == "IMG'S" &&
+                    }
+                    if (inputCurrentItem == "IMG'S" &&
                         outputCurrentItem == "Word File") {
                       // image to Word
                     } else {
