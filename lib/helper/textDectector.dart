@@ -3,18 +3,19 @@ import 'package:image_picker/image_picker.dart';
 
 class TextDetectorHelper {
   Future<String> getRecognizedText(XFile image) async {
-    final inputImage = InputImage.fromFilePath(image.path);
     final textDetector = GoogleMlKit.vision.textRecognizer();
-    RecognizedText recognizedText = await textDetector.processImage(inputImage);
-    await textDetector.close();
+    String finalText = "";
 
-    String text = "";
+    final inputImage = InputImage.fromFilePath(image.path);
+    RecognizedText recognizedText = await textDetector.processImage(inputImage);
+
     for (TextBlock block in recognizedText.blocks) {
       for (TextLine line in block.lines) {
-        text += "${line.text}\n";
+        finalText += "${line.text}\n";
       }
     }
 
-    return text;
+    await textDetector.close();
+    return finalText;
   }
 }
