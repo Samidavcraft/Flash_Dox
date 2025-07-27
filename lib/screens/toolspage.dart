@@ -640,9 +640,6 @@ class _ToolspageState extends State<Toolspage> {
                 ),
               ),
 
-              // why spacing between below text and top grid view
-              Text("565"),
-
               // for testing Text Detector
               scannedText.isEmpty
                   ? const Text("Text Not Detected")
