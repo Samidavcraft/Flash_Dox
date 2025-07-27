@@ -484,16 +484,16 @@ class _ToolspageState extends State<Toolspage> {
                 child: Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxWidth:
-                          listviewitems.featureToolsData["icon"].length * 25.w,
+                      maxWidth: listviewitems.featureToolsData.length * 25.w,
                     ),
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
 
-                      itemCount: listviewitems.featureToolsData["icon"].length,
+                      itemCount: listviewitems.featureToolsData.length,
                       itemBuilder: (context, index) {
+                        final item = listviewitems.featureToolsData[index];
                         return Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4.w),
                           child: SizedBox(
@@ -502,10 +502,10 @@ class _ToolspageState extends State<Toolspage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                listviewitems.featureToolsData["icon"][index],
+                                Image.asset(item["icon"], scale: 4),
 
                                 Text(
-                                  listviewitems.featureToolsData["Desc"][index],
+                                  item["title"],
                                   style: TextStyle(
                                     fontSize: _appWidgetSizer
                                         .settingsDescSize(),
@@ -539,14 +539,15 @@ class _ToolspageState extends State<Toolspage> {
               SizedBox(
                 child: GridView.builder(
                   shrinkWrap: true,
-                  itemCount: listviewitems.featureToolsData2["icon"].length,
+                  itemCount: listviewitems.featureToolsData2.length,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
+                    final list = listviewitems.featureToolsData2[index];
                     return Column(
                       children: [
-                        listviewitems.featureToolsData2["icon"][index],
+                        Image.asset(list["icon"], scale: 4),
                         Text(
-                          listviewitems.featureToolsData2["Desc"][index],
+                          list["title"],
                           style: TextStyle(
                             fontSize: _appWidgetSizer.settingsDescSize(),
                             color: AppWidgetSizer.greycolor,
@@ -605,9 +606,9 @@ class _ToolspageState extends State<Toolspage> {
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  mainAxisSpacing: 0, // ✨ remove vertical gap
+                  mainAxisSpacing: 0,
                   crossAxisSpacing: 0,
-                  mainAxisExtent: 10.h, // ✨ force uniform tight height
+                  mainAxisExtent: 10.h,
                 ),
               ),
 

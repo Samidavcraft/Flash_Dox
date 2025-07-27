@@ -19,33 +19,21 @@ class Listviewitems extends SearchViewListView {
     "Excel File",
   ];
 
-  Map<String, dynamic> featureToolsData = {
-    "icon": [
-      Image.asset("assets/pdf.png"),
-      Image.asset("assets/ppt.png"),
-      Image.asset("assets/ms_word.png"),
-    ],
+  List<Map<String, dynamic>> featureToolsData = [
+    {"icon": "pdf_converter.png", "title": "Convert to PDF", "type": "PDF"},
 
-    "Desc": ["Convert to PDF", "Convert to TXT", "Convert to IMG"],
-  };
+    {"icon": "txt_converter.png", "title": "Convert to Text", "type": "TXT"},
 
-  Map<String, dynamic> featureToolsData2 = {
-    "icon": [
-      Image.asset("assets/pdf.png", scale: 4),
-      Image.asset("assets/ppt.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-    ],
+    {"icon": "imgg_converter.png", "title": "Convert to Image", "type": "IMG"},
+  ];
 
-    "Desc": [
-      "Convert to PDF",
-      "Convert to TXT",
-      "Convert to IMG",
-      "Convert to IMG",
-      "Convert to IMG",
-    ],
-  };
+  List<Map<String, dynamic>> featureToolsData2 = [
+    {"icon": "word_to_pdf.png", "title": "Word to PDF", "type": "W to P"},
+
+    {"icon": "pdf_to_txt.png", "title": "PDF To Text", "type": "P to T"},
+    {"icon": "pdf_to_img.png", "title": "PDF To Image", "type": "P to I"},
+    {"icon": "img_to_pdf.png", "title": "Image to PDF", "type": "I to P"},
+  ];
 
   Map<String, dynamic> othertoolsdata = {
     "icon": [Image.asset("assets/merge_pdf_files.png", scale: 4)],
