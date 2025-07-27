@@ -355,65 +355,83 @@ class _HomepageState extends State<Homepage> {
             ),
             // below Widget for Testing UI
             SizedBox(height: 2.h),
-            SizedBox(
-              width: 100.w,
-              height: 25.w,
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth:
-                        listviewitems.homeRecentFilesList["icon"].length * 25.w,
-                  ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
 
-                    itemCount: listviewitems.homeRecentFilesList["icon"].length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.w),
-                        child: InkWell(
-                          onTap: () {
-                            // for testing
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(milliseconds: 2000),
-                                backgroundColor: Colors.black,
-                                content: Text(
-                                  "Clicked ${listviewitems.homeFolderList["title"][index]}",
-                                  style: TextStyle(color: Colors.white),
+            (listviewitems.homeRecentFilesList["icon"] as List).isEmpty &&
+                    (listviewitems.homeRecentFilesList["Desc"] as List).isEmpty
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "No Recent File!",
+                        style: TextStyle(
+                          fontSize: appBar.settingsTitleSize(),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  )
+                : SizedBox(
+                    width: 100.w,
+                    height: 25.w,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth:
+                              listviewitems.homeRecentFilesList["icon"].length *
+                              25.w,
+                        ),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+
+                          itemCount:
+                              listviewitems.homeRecentFilesList["icon"].length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4.w),
+                              child: InkWell(
+                                onTap: () {
+                                  // for testing
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      duration: Duration(milliseconds: 2000),
+                                      backgroundColor: Colors.black,
+                                      content: Text(
+                                        "Clicked ${listviewitems.homeFolderList["title"][index]}",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SizedBox(
+                                  width: 17.w,
+
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      listviewitems
+                                          .homeRecentFilesList["icon"][index],
+
+                                      Text(
+                                        listviewitems
+                                            .homeRecentFilesList["Desc"][index],
+                                        style: TextStyle(
+                                          fontSize: appBar.settingsDescSize(),
+                                          color: AppWidgetSizer.greycolor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
                           },
-                          child: SizedBox(
-                            width: 17.w,
-
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                listviewitems
-                                    .homeRecentFilesList["icon"][index],
-
-                                Text(
-                                  listviewitems
-                                      .homeRecentFilesList["Desc"][index],
-                                  style: TextStyle(
-                                    fontSize: appBar.settingsDescSize(),
-                                    color: AppWidgetSizer.greycolor,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                          ),
                         ),
-                      );
-                    },
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
             Divider(height: 1.h),
             Container(
               margin: EdgeInsets.only(left: 5.w, top: 1.h),
