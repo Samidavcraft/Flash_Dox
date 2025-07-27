@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 class Listviewitems extends SearchViewListView {
   // toolspage Data
 
-  List<String> inputFormatData = [
-    "PDF File",
-    "World File",
-    "IMG'S",
-    "PPT File",
-    "Excel File",
+  List<Map<String, dynamic>> inputFormatData = [
+    {"icon": "pdf_component.png", "title": "PDF File"},
+    {"icon": "word_component.png", "title": "Word File"},
+    {"icon": "img_component.png", "title": "IMG'S File"},
+
+    {"icon": "ppt_component.png", "title": "PPT File"},
+    {"icon": "excel_component.png", "title": "Excel File"},
   ];
 
-  List<String> outputFormatData = [
-    "PDF File",
-    "World File",
-    "IMG'S",
-    "PPT File",
-    "Excel File",
+  List<Map<String, dynamic>> outputFormatData = [
+    {"icon": "pdf_component.png", "title": "PDF File"},
+    {"icon": "word_component.png", "title": "Word File"},
+    {"icon": "img_component.png", "title": "IMG'S File"},
+
+    {"icon": "ppt_component.png", "title": "PPT File"},
+    {"icon": "excel_component.png", "title": "Excel File"},
   ];
 
   List<Map<String, dynamic>> featureToolsData = [

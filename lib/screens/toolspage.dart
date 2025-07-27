@@ -20,9 +20,9 @@ class _ToolspageState extends State<Toolspage> {
   final AppWidgetSizer appsizer = AppWidgetSizer();
 
   // input DropdownButton
-  String? inputCurrentItem;
+  Map<String, dynamic>? inputCurrentItem;
   // output DropdownButton
-  String? outputCurrentItem;
+  Map<String, dynamic>? outputCurrentItem;
 
   // listview for DropDownButton and Future ListView
   Listviewitems listviewitems = Listviewitems();
@@ -130,7 +130,7 @@ class _ToolspageState extends State<Toolspage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 2.w),
-                        child: DropdownButton<String>(
+                        child: DropdownButton<Map<String, dynamic>>(
                           hint: Text(
                             "Select Input Format",
                             style: TextStyle(
@@ -143,20 +143,29 @@ class _ToolspageState extends State<Toolspage> {
                           icon: const Icon(Icons.keyboard_arrow_down_rounded),
                           underline: const SizedBox(),
                           value: inputCurrentItem,
+
                           items: listviewitems.inputFormatData
-                              .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
+                              .map<DropdownMenuItem<Map<String, dynamic>>>((
+                                Map<String, dynamic> value,
+                              ) {
+                                return DropdownMenuItem<Map<String, dynamic>>(
                                   value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(fontSize: 16.sp),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(value["icon"], scale: 4),
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        value["title"],
+                                        style: TextStyle(fontSize: 16.sp),
+                                      ),
+                                    ],
                                   ),
                                 );
                               })
                               .toList(),
-                          onChanged: (String? value) {
+                          onChanged: (Map<String, dynamic>? value) {
                             setState(() {
-                              inputCurrentItem = value!;
+                              inputCurrentItem = value;
                             });
                           },
                         ),
@@ -341,7 +350,7 @@ class _ToolspageState extends State<Toolspage> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
-                  child: DropdownButton<String>(
+                  child: DropdownButton<Map<String, dynamic>>(
                     hint: Text(
                       "Select Output Format",
                       style: TextStyle(
@@ -355,19 +364,27 @@ class _ToolspageState extends State<Toolspage> {
                     underline: const SizedBox(),
                     value: outputCurrentItem,
                     items: listviewitems.outputFormatData
-                        .map<DropdownMenuItem<String>>((value) {
-                          return DropdownMenuItem<String>(
+                        .map<DropdownMenuItem<Map<String, dynamic>>>((
+                          Map<String, dynamic> value,
+                        ) {
+                          return DropdownMenuItem<Map<String, dynamic>>(
                             value: value,
-                            child: Text(
-                              value,
-                              style: TextStyle(fontSize: 16.sp),
+                            child: Row(
+                              children: [
+                                Image.asset(value["icon"], scale: 4),
+                                SizedBox(width: 3.w),
+                                Text(
+                                  value["title"],
+                                  style: TextStyle(fontSize: 16.sp),
+                                ),
+                              ],
                             ),
                           );
                         })
                         .toList(),
-                    onChanged: (String? value) {
+                    onChanged: (Map<String, dynamic>? value) {
                       setState(() {
-                        outputCurrentItem = value!;
+                        outputCurrentItem = value;
                       });
                     },
                   ),
@@ -382,21 +399,32 @@ class _ToolspageState extends State<Toolspage> {
                   onPressed: () {
                     // for convert Files
 
-                    if (inputCurrentItem == "IMG'S" &&
-                        outputCurrentItem == "Excel File") {
-                      // covert here image to excel
-                    } else if (inputCurrentItem == "IMG'S" &&
-                        outputCurrentItem == "PDF File") {
+                    if (((inputCurrentItem?["title"] == "IMG'S") ||
+                            (inputCurrentItem?["icon"] ==
+                                "img_component.png")) &&
+                        (outputCurrentItem?["title"] == "Excel File" ||
+                            (outputCurrentItem?["icon"] ==
+                                "excel_component.png"))) {
+                      // image to excel
+                      print("Converted Image to Excel");
+                    } else if (inputCurrentItem?["title"] == "IMG'S" ||
+                        (inputCurrentItem?["icon"] == "img_component.png") &&
+                            outputCurrentItem?["title"] == "PDF File" ||
+                        (outputCurrentItem?["icon"] == "pdf_component")) {
                       // convert here image to pdf
-                    }
-                    if (inputCurrentItem == "IMG'S" &&
-                        outputCurrentItem == "Word File") {
+                      print("image to pdf");
+                    } else if (inputCurrentItem?["title"] == "IMG'S" ||
+                        (inputCurrentItem?["icon"] == "img_component.png") &&
+                            outputCurrentItem?["title"] == "Word File" ||
+                        (outputCurrentItem?["icon"] == "word_component")) {
                       // image to Word
+                      print("image to word");
                     } else {
+                      // Default warning
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            "Please Select input and output",
+                            "Please select valid input and output formats.",
                             style: TextStyle(
                               fontSize: appsizer.settingsDescSize(),
                               color: Colors.white,
