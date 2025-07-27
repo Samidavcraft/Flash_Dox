@@ -189,7 +189,6 @@ class _ToolspageState extends State<Toolspage> {
                             scannedText = result;
                           });
 
-                          // Open the bottom sheet only after text detection is complete
                           await showModalBottomSheet(
                             context: context.mounted ? context : context,
                             builder: (context) {
@@ -480,8 +479,8 @@ class _ToolspageState extends State<Toolspage> {
               SizedBox(height: 1.h),
 
               SizedBox(
-                width: 100.w,
-                height: 25.w,
+                width: double.infinity,
+                height: 22.w,
                 child: Center(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
@@ -489,6 +488,7 @@ class _ToolspageState extends State<Toolspage> {
                           listviewitems.featureToolsData["icon"].length * 25.w,
                     ),
                     child: ListView.builder(
+                      shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
 
@@ -537,41 +537,82 @@ class _ToolspageState extends State<Toolspage> {
               ),
               SizedBox(height: 1.h),
               SizedBox(
-                width: double.infinity,
-                height: 50.w,
                 child: GridView.builder(
+                  shrinkWrap: true,
                   itemCount: listviewitems.featureToolsData2["icon"].length,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.w),
-                      child: SizedBox(
-                        width: 12.w,
-                        height: 25.h,
-                        child: Column(
-                          children: [
-                            listviewitems.featureToolsData2["icon"][index],
-                            Text(
-                              listviewitems.featureToolsData2["Desc"][index],
-                              style: TextStyle(
-                                fontSize: _appWidgetSizer.settingsDescSize(),
-                                color: AppWidgetSizer.greycolor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                    return Column(
+                      children: [
+                        listviewitems.featureToolsData2["icon"][index],
+                        Text(
+                          listviewitems.featureToolsData2["Desc"][index],
+                          style: TextStyle(
+                            fontSize: _appWidgetSizer.settingsDescSize(),
+                            color: AppWidgetSizer.greycolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
+                      ],
                     );
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-
-                    mainAxisExtent: 10.h,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 0,
+                    mainAxisExtent: 11.h,
                   ),
                 ),
               ),
+
+              Padding(
+                padding: EdgeInsets.only(left: 4.w),
+                child: Text(
+                  "Other Tools",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppWidgetSizer.greycolor,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+              SizedBox(height: 1.h),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: listviewitems.othertoolsdata["icon"].length,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        listviewitems.othertoolsdata["icon"][index],
+                        Text(
+                          listviewitems.othertoolsdata["Desc"][index],
+                          style: TextStyle(
+                            fontSize: _appWidgetSizer.settingsDescSize(),
+                            color: AppWidgetSizer.greycolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 0, // ✨ remove vertical gap
+                  crossAxisSpacing: 0,
+                  mainAxisExtent: 10.h, // ✨ force uniform tight height
+                ),
+              ),
+
+              // why spacing between below text and top grid view
+              Text("565"),
 
               // for testing Text Detector
               scannedText.isEmpty

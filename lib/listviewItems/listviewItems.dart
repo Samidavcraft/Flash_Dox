@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Listviewitems extends SearchViewListView {
+  // toolspage Data
+
   List<String> inputFormatData = [
     "PDF File",
     "World File",
@@ -43,6 +45,12 @@ class Listviewitems extends SearchViewListView {
       "Convert to IMG",
       "Convert to IMG",
     ],
+  };
+
+  Map<String, dynamic> othertoolsdata = {
+    "icon": [Image.asset("assets/merge_pdf_files.png", scale: 4)],
+
+    "Desc": ["Merge PDF Files"],
   };
 }
 
