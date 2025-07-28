@@ -214,7 +214,7 @@ class _ToolspageState extends State<Toolspage> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            "Your Input Image",
+                                            "Your Input Image Text",
                                             style: TextStyle(
                                               fontSize: appsizer
                                                   .settingsTitleSize(),
@@ -225,7 +225,7 @@ class _ToolspageState extends State<Toolspage> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
                                           margin: EdgeInsets.all(5.w),
@@ -256,38 +256,6 @@ class _ToolspageState extends State<Toolspage> {
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                          margin: EdgeInsets.only(right: 3.w),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  const Color.fromARGB(
-                                                    255,
-                                                    114,
-                                                    112,
-                                                    112,
-                                                  ),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(3),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              // for testing close Bottom Sheet
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text(
-                                              "Confirm",
-                                              style: TextStyle(
-                                                fontSize: appsizer
-                                                    .settingsTitleSize(),
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
                                         ),
                                       ],
                                     ),
