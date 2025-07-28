@@ -4,23 +4,20 @@ class Listviewitems extends SearchViewListView {
   // toolspage Data
 
   List<Map<String, dynamic>> inputFormatData = [
-    {"icon": "pdf_component.png", "title": "PDF File"},
-    {"icon": "word_component.png", "title": "Word File"},
-    {"icon": "img_component.png", "title": "IMG'S File"},
-
-    {"icon": "ppt_component.png", "title": "PPT File"},
-    {"icon": "excel_component.png", "title": "Excel File"},
+    {"icon": "pdf_component.png", "title": "PDF File", "type": "PDF"},
+    {"icon": "word_component.png", "title": "Word File", "type": "Word"},
+    {"icon": "img_component.png", "title": "IMG'S File", "type": "IMG"},
+    {"icon": "ppt_component.png", "title": "PPT File", "type": "PPT"},
+    {"icon": "excel_component.png", "title": "Excel File", "type": "Excel"},
   ];
 
   List<Map<String, dynamic>> outputFormatData = [
-    {"icon": "pdf_component.png", "title": "PDF File"},
-    {"icon": "word_component.png", "title": "Word File"},
-    {"icon": "img_component.png", "title": "IMG'S File"},
-
-    {"icon": "ppt_component.png", "title": "PPT File"},
-    {"icon": "excel_component.png", "title": "Excel File"},
+    {"icon": "pdf_component.png", "title": "PDF File", "type": "PDF"},
+    {"icon": "word_component.png", "title": "Word File", "type": "Word"},
+    {"icon": "img_component.png", "title": "IMG'S File", "type": "IMG"},
+    {"icon": "ppt_component.png", "title": "PPT File", "type": "PPT"},
+    {"icon": "excel_component.png", "title": "Excel File", "type": "Excel"},
   ];
-
   List<Map<String, dynamic>> featureToolsData = [
     {"icon": "pdf_converter.png", "title": "Convert to PDF", "type": "PDF"},
 
@@ -129,16 +126,16 @@ class DrawerlistItems extends HomeRecentFiles {
 class HomeRecentFiles extends HomeFolderList {
   Map<String, dynamic> homeRecentFilesList = {
     "icon": [
-      Image.asset("assets/pdf.png"),
-      Image.asset("assets/ppt.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
-      Image.asset("assets/ms_word.png"),
+      Image.asset("assets/pdf.png", scale: 4),
+      Image.asset("assets/ppt.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/ms_word.png", scale: 4),
     ],
 
     "Desc": [

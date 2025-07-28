@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/helper/textDectector.dart';
+import 'package:all_example/screens/helper_screen/futuretools_Screen.dart';
 
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,9 @@ class _ToolspageState extends State<Toolspage> {
 
   // text Detector Helper
   TextDetectorHelper textDetectorHelper = TextDetectorHelper();
+
+  // dropdown button disable
+  bool isDisable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +169,75 @@ class _ToolspageState extends State<Toolspage> {
                               .toList(),
                           onChanged: (Map<String, dynamic>? value) {
                             setState(() {
+                              isDisable = true;
                               inputCurrentItem = value;
+
+                              Map<String, dynamic> selectedItem = listviewitems
+                                  .inputFormatData
+                                  .firstWhere(
+                                    (item) => item['type'] == value?['type'],
+                                  );
+
+                              if (selectedItem['type'] == 'PDF') {
+                                listviewitems.outputFormatData.isEmpty
+                                    ? print("Empty")
+                                    : listviewitems.outputFormatData =
+                                          listviewitems.inputFormatData
+                                              .where(
+                                                (item) =>
+                                                    item['type'] == 'Word' ||
+                                                    item['type'] == 'IMG',
+                                              )
+                                              .toList();
+                              } else if (selectedItem['type'] == 'Word') {
+                                listviewitems.outputFormatData.isEmpty
+                                    ? print("Empty")
+                                    : listviewitems.outputFormatData =
+                                          listviewitems.inputFormatData
+                                              .where(
+                                                (item) =>
+                                                    item['type'] == 'PDF' ||
+                                                    item['type'] == 'IMG',
+                                              )
+                                              .toList();
+                              } else if (selectedItem['type'] == 'IMG') {
+                                listviewitems.outputFormatData.isEmpty
+                                    ? print("Empty")
+                                    : listviewitems.outputFormatData =
+                                          listviewitems.inputFormatData
+                                              .where(
+                                                (item) =>
+                                                    item['type'] == 'PDF' ||
+                                                    item['type'] == 'Word',
+                                              )
+                                              .toList();
+                              } else if (selectedItem['type'] == 'PPT') {
+                                listviewitems.outputFormatData.isEmpty
+                                    ? print("Empty")
+                                    : listviewitems.outputFormatData =
+                                          listviewitems.inputFormatData
+                                              .where(
+                                                (item) =>
+                                                    item['type'] == 'PDF' ||
+                                                    item['type'] == 'Word' ||
+                                                    item['type'] == "IMG",
+                                              )
+                                              .toList();
+                              } else if (selectedItem['type'] == 'Excel') {
+                                listviewitems.outputFormatData = listviewitems
+                                    .inputFormatData
+                                    .where(
+                                      (item) =>
+                                          item['type'] == 'PDF' ||
+                                          item['type'] == "IMG",
+                                    )
+                                    .toList();
+                              } else
+                                () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("No Found")),
+                                  );
+                                };
                             });
                           },
                         ),
@@ -178,93 +250,96 @@ class _ToolspageState extends State<Toolspage> {
                       flex: 2,
 
                       child: TextButton(
-                        onPressed: () async {
-                          // for Image/File Pick
+                        onPressed: isDisable
+                            ? () async {
+                                // for Image/File Pick
 
-                          final XFile? photo = await imagePicker.pickImage(
-                            source: ImageSource.gallery,
-                          );
+                                final XFile? photo = await imagePicker
+                                    .pickImage(source: ImageSource.gallery);
 
-                          if (photo == null) {
-                            print("No Image Selected");
-                            return;
-                          }
+                                if (photo == null) {
+                                  print("No Image Selected");
+                                  return;
+                                }
 
-                          final result = await textDetectorHelper
-                              .getRecognizedText(photo);
+                                final result = await textDetectorHelper
+                                    .getRecognizedText(photo);
 
-                          setState(() {
-                            file = photo;
-                            scannedText = result;
-                          });
+                                setState(() {
+                                  file = photo;
+                                  scannedText = result;
+                                });
 
-                          await showModalBottomSheet(
-                            context: context.mounted ? context : context,
-                            builder: (context) {
-                              return SizedBox(
-                                width: double.infinity,
-                                height: 20.h,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 2.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                await showModalBottomSheet(
+                                  context: context.mounted ? context : context,
+                                  builder: (context) {
+                                    return SizedBox(
+                                      width: double.infinity,
+                                      height: 20.h,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            "Your Input Image Text",
-                                            style: TextStyle(
-                                              fontSize: appsizer
-                                                  .settingsTitleSize(),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 2.h),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "Your Input Image Text",
+                                                  style: TextStyle(
+                                                    fontSize: appsizer
+                                                        .settingsTitleSize(),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.all(5.w),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                ),
+                                                width: 25.w,
+                                                height: 10.h,
+                                                child: file == null
+                                                    ? Center(
+                                                        child: Text(
+                                                          "Image not Picked",
+                                                          style: TextStyle(
+                                                            fontSize: appsizer
+                                                                .settingsDescSize(),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Padding(
+                                                        padding: EdgeInsets.all(
+                                                          1.w,
+                                                        ),
+                                                        child: Image.file(
+                                                          File(file!.path),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.all(5.w),
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey,
-                                            borderRadius: BorderRadius.circular(
-                                              15,
-                                            ),
-                                          ),
-                                          width: 25.w,
-                                          height: 10.h,
-                                          child: file == null
-                                              ? Center(
-                                                  child: Text(
-                                                    "Image not Picked",
-                                                    style: TextStyle(
-                                                      fontSize: appsizer
-                                                          .settingsDescSize(),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                )
-                                              : Padding(
-                                                  padding: EdgeInsets.all(1.w),
-                                                  child: Image.file(
-                                                    File(file!.path),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
+                                    );
+                                  },
+                                );
+                              }
+                            : null,
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey.shade900,
                           padding: EdgeInsets.symmetric(vertical: 1.h),
@@ -350,11 +425,13 @@ class _ToolspageState extends State<Toolspage> {
                           );
                         })
                         .toList(),
-                    onChanged: (Map<String, dynamic>? value) {
-                      setState(() {
-                        outputCurrentItem = value;
-                      });
-                    },
+                    onChanged: isDisable
+                        ? (Map<String, dynamic>? value) {
+                            setState(() {
+                              outputCurrentItem = value;
+                            });
+                          }
+                        : null,
                   ),
                 ),
               ),
@@ -364,56 +441,61 @@ class _ToolspageState extends State<Toolspage> {
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.only(right: 4.w),
                 child: TextButton(
-                  onPressed: () {
-                    // for convert Files
+                  onPressed: isDisable
+                      ? () {
+                          // for convert Files
 
-                    if (((inputCurrentItem?["title"] == "IMG'S") ||
-                            (inputCurrentItem?["icon"] ==
-                                "img_component.png")) &&
-                        (outputCurrentItem?["title"] == "Excel File" ||
-                            (outputCurrentItem?["icon"] ==
-                                "excel_component.png"))) {
-                      // image to excel
-                      print("Converted Image to Excel");
-                    } else if (inputCurrentItem?["title"] == "IMG'S" ||
-                        (inputCurrentItem?["icon"] == "img_component.png") &&
-                            outputCurrentItem?["title"] == "PDF File" ||
-                        (outputCurrentItem?["icon"] == "pdf_component")) {
-                      // convert here image to pdf
-                      print("image to pdf");
-                    } else if (inputCurrentItem?["title"] == "IMG'S" ||
-                        (inputCurrentItem?["icon"] == "img_component.png") &&
-                            outputCurrentItem?["title"] == "Word File" ||
-                        (outputCurrentItem?["icon"] == "word_component")) {
-                      // image to Word
-                      print("image to word");
-                    } else {
-                      // Default warning
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "Please select valid input and output formats.",
-                            style: TextStyle(
-                              fontSize: appsizer.settingsDescSize(),
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 2000),
-                          backgroundColor: Colors.black,
-                          action: SnackBarAction(
-                            label: "Ok",
-                            textColor: Colors.white,
-                            onPressed: () {
-                              ScaffoldMessenger.of(
-                                context,
-                              ).hideCurrentSnackBar();
-                            },
-                          ),
-                        ),
-                      );
-                    }
-                  },
+                          if (((inputCurrentItem?["title"] == "IMG'S") ||
+                                  (inputCurrentItem?["icon"] ==
+                                      "img_component.png")) &&
+                              (outputCurrentItem?["title"] == "Excel File" ||
+                                  (outputCurrentItem?["icon"] ==
+                                      "excel_component.png"))) {
+                            // image to excel
+                            print("Converted Image to Excel");
+                          } else if (inputCurrentItem?["title"] == "IMG'S" ||
+                              (inputCurrentItem?["icon"] ==
+                                      "img_component.png") &&
+                                  outputCurrentItem?["title"] == "PDF File" ||
+                              (outputCurrentItem?["icon"] == "pdf_component")) {
+                            // convert here image to pdf
+                            print("image to pdf");
+                          } else if (inputCurrentItem?["title"] == "IMG'S" ||
+                              (inputCurrentItem?["icon"] ==
+                                      "img_component.png") &&
+                                  outputCurrentItem?["title"] == "Word File" ||
+                              (outputCurrentItem?["icon"] ==
+                                  "word_component")) {
+                            // image to Word
+                            print("image to word");
+                          } else {
+                            // Default warning
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Please select valid input and output formats.",
+                                  style: TextStyle(
+                                    fontSize: appsizer.settingsDescSize(),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 2000),
+                                backgroundColor: Colors.black,
+                                action: SnackBarAction(
+                                  label: "Ok",
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(
+                                      context,
+                                    ).hideCurrentSnackBar();
+                                  },
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      : null,
 
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.grey.shade900,
@@ -490,27 +572,37 @@ class _ToolspageState extends State<Toolspage> {
                       itemCount: listviewitems.featureToolsData.length,
                       itemBuilder: (context, index) {
                         final item = listviewitems.featureToolsData[index];
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
-                          child: SizedBox(
-                            width: 17.w,
-                            height: 25.h,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(item["icon"], scale: 4),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FuturetoolsScreen(),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4.w),
+                            child: SizedBox(
+                              width: 17.w,
+                              height: 25.h,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(item["icon"], scale: 4),
 
-                                Text(
-                                  item["title"],
-                                  style: TextStyle(
-                                    fontSize: _appWidgetSizer
-                                        .settingsDescSize(),
-                                    color: AppWidgetSizer.greycolor,
-                                    fontWeight: FontWeight.bold,
+                                  Text(
+                                    item["title"],
+                                    style: TextStyle(
+                                      fontSize: _appWidgetSizer
+                                          .settingsDescSize(),
+                                      color: AppWidgetSizer.greycolor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );
