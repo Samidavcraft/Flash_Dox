@@ -18,19 +18,58 @@ class _FuturetoolsScreenState extends State<FuturetoolsScreen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     //
-    var imageWidget;
+    Widget imageWidget;
+    Widget textWidget;
     switch (selectedItem['type']) {
       case 'PDF':
         imageWidget = Image.asset('assets/pdf_component.png', scale: 3);
         break;
       case 'TXT':
-        imageWidget = Image.asset('assets/word_component.png', scale: 3);
+        imageWidget = Image.asset('assets/text_component.png', scale: 3);
         break;
       case 'IMG':
         imageWidget = Image.asset('assets/img_component.png', scale: 3);
         break;
       default:
         imageWidget = const Icon(Icons.error, size: 60, color: Colors.red);
+    }
+
+    switch (selectedItem['type']) {
+      case 'PDF':
+        textWidget = Text(
+          "PDF Converter",
+          style: TextStyle(
+            fontSize: appsizer.settingsDescSize(),
+            fontWeight: FontWeight.bold,
+          ),
+        );
+        break;
+      case 'TXT':
+        textWidget = Text(
+          "Text Converter",
+          style: TextStyle(
+            fontSize: appsizer.settingsDescSize(),
+            fontWeight: FontWeight.bold,
+          ),
+        );
+        break;
+      case 'IMG':
+        textWidget = Text(
+          "Image Converter",
+          style: TextStyle(
+            fontSize: appsizer.settingsDescSize(),
+            fontWeight: FontWeight.bold,
+          ),
+        );
+        break;
+      default:
+        textWidget = Text(
+          "Not Found",
+          style: TextStyle(
+            fontSize: appsizer.settingsDescSize(),
+            fontWeight: FontWeight.bold,
+          ),
+        );
     }
 
     return Scaffold(
@@ -87,13 +126,7 @@ class _FuturetoolsScreenState extends State<FuturetoolsScreen> {
                 ],
               ),
 
-              Text(
-                "PDF Converter",
-                style: TextStyle(
-                  fontSize: appsizer.settingsDescSize(),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              textWidget,
             ],
           ),
         ),
