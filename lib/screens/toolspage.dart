@@ -574,12 +574,19 @@ class _ToolspageState extends State<Toolspage> {
                         final item = listviewitems.featureToolsData[index];
                         return InkWell(
                           onTap: () {
+                            final Map<String, dynamic> selectedItem =
+                                listviewitems.featureToolsData[index];
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => FuturetoolsScreen(),
+                                settings: RouteSettings(
+                                  arguments: selectedItem,
+                                ),
                               ),
                             );
+                            print(selectedItem);
                           },
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 4.w),
