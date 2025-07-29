@@ -102,6 +102,7 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       drawer: Drawer(
+        backgroundColor: drawer,
         child: Column(
           children: [
             DrawerHeader(
@@ -111,18 +112,18 @@ class _HomepageState extends State<Homepage> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [Image.asset(drawerIcon, scale: 10.sp)],
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         child: Text(
                           "Manager & Viewer",
-                          style: TextStyle(
+                          style: GoogleFonts.inter(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.sp,
                           ),
@@ -157,6 +158,7 @@ class _HomepageState extends State<Homepage> {
                       title: Text(
                         listviewitems.drawerItems["title"][index],
                         style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w500,
                           fontSize: appBar.settingsTitleSize(),
                         ),
                       ),
@@ -232,7 +234,7 @@ class _HomepageState extends State<Homepage> {
                                             5,
                                           ),
                                         ),
-                                        fillColor: Colors.grey,
+                                        fillColor: searchBarColor,
                                         contentPadding: EdgeInsets.only(
                                           top: 1.h,
                                           left: 2.w,
@@ -240,9 +242,10 @@ class _HomepageState extends State<Homepage> {
                                         filled: true,
                                         hint: Text(
                                           "Search Here",
-                                          style: TextStyle(
+                                          style: GoogleFonts.inter(
                                             fontSize: appBar
                                                 .settingsTitleSize(),
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
@@ -315,7 +318,7 @@ class _HomepageState extends State<Homepage> {
                           height: 5.h,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: AppWidgetSizer.greycolor,
+                            color: searchBarColor,
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -323,8 +326,9 @@ class _HomepageState extends State<Homepage> {
                               children: [
                                 Text(
                                   "Search Here",
-                                  style: TextStyle(
+                                  style: GoogleFonts.inter(
                                     fontSize: appBar.settingsTitleSize(),
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 Spacer(),
@@ -343,9 +347,9 @@ class _HomepageState extends State<Homepage> {
                 margin: EdgeInsets.only(left: 5.w),
                 child: Text(
                   "Recent Files",
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     fontSize: appBar.settingsTitleSize(),
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -415,10 +419,10 @@ class _HomepageState extends State<Homepage> {
                                         Text(
                                           listviewitems
                                               .homeRecentFilesList["Desc"][index],
-                                          style: TextStyle(
-                                            fontSize: appBar.settingsDescSize(),
-                                            color: AppWidgetSizer.greycolor,
-                                            fontWeight: FontWeight.bold,
+                                          style: GoogleFonts.inter(
+                                            fontSize: 14.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
@@ -437,9 +441,9 @@ class _HomepageState extends State<Homepage> {
                 margin: EdgeInsets.only(left: 5.w, top: 1.h),
                 child: Text(
                   "Folders",
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     fontSize: appBar.settingsTitleSize(),
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -476,19 +480,19 @@ class _HomepageState extends State<Homepage> {
                           listviewitems.homeFolderList["icon"][index],
                           Text(
                             listviewitems.homeFolderList["title"][index],
-                            style: TextStyle(
-                              fontSize: appBar.settingsDescSize(),
-                              color: AppWidgetSizer.greycolor,
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.inter(
+                              fontSize: 15.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.center,
                           ),
                           Text(
                             listviewitems.homeFolderList["desc"][index],
-                            style: TextStyle(
-                              fontSize: appBar.settingsDescSize(),
+                            style: GoogleFonts.inter(
+                              fontSize: 14.sp,
                               color: AppWidgetSizer.greycolor,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.center,
                           ),

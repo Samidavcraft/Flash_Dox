@@ -47,8 +47,13 @@ class _ManagerpageState extends State<Managerpage> {
             ),
           ),
           bottom: TabBar(
+            labelColor: Colors.white,
             dividerHeight: 0.1,
-
+            labelStyle: GoogleFonts.inter(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+            ),
+            indicatorColor: Colors.white,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 2,
             isScrollable: true,

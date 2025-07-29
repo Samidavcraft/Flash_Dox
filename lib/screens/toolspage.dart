@@ -4,6 +4,7 @@ import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/helper/textDectector.dart';
 import 'package:all_example/screens/helper_screen/futuretools_Screen.dart';
+import 'package:all_example/themes/appwidget_themes.dart';
 
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
@@ -132,20 +133,22 @@ class _ToolspageState extends State<Toolspage> {
                       flex: 5,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
+                          color: searchBarColor,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         padding: EdgeInsets.symmetric(horizontal: 2.w),
                         child: DropdownButton<Map<String, dynamic>>(
                           hint: Text(
                             "Select Input Format",
-                            style: TextStyle(
+                            style: GoogleFonts.inter(
                               color: AppWidgetSizer.greycolor,
+                              fontWeight: FontWeight.w600,
                               fontSize: 15.sp,
                             ),
                           ),
                           isExpanded: true,
                           iconSize: 20.sp,
+
                           icon: const Icon(Icons.keyboard_arrow_down_rounded),
                           underline: const SizedBox(),
                           value: inputCurrentItem,
@@ -317,7 +320,7 @@ class _ToolspageState extends State<Toolspage> {
                                                     ? Center(
                                                         child: Text(
                                                           "Image not Picked",
-                                                          style: TextStyle(
+                                                          style: GoogleFonts.inter(
                                                             fontSize: appsizer
                                                                 .settingsDescSize(),
                                                             fontWeight:
@@ -345,7 +348,7 @@ class _ToolspageState extends State<Toolspage> {
                               }
                             : null,
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.grey.shade900,
+                          backgroundColor: searchBarColor,
                           padding: EdgeInsets.symmetric(vertical: 1.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -359,13 +362,13 @@ class _ToolspageState extends State<Toolspage> {
                               style: GoogleFonts.inter(
                                 fontWeight: FontWeight.w500,
                                 color: AppWidgetSizer.greycolor,
-                                fontSize: 16.sp,
+                                fontSize: 15.sp,
                               ),
                             ),
                             SizedBox(width: 1.w),
                             ImageIcon(
                               AssetImage("assets/image/import.png"),
-                              color: AppWidgetSizer.greycolor,
+
                               size: 20.sp,
                             ),
                           ],
@@ -394,19 +397,22 @@ class _ToolspageState extends State<Toolspage> {
                 padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade900,
+                    color: searchBarColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: DropdownButton<Map<String, dynamic>>(
                     hint: Text(
                       "Select Output Format",
-                      style: TextStyle(
+                      style: GoogleFonts.inter(
                         fontSize: 15.sp,
+                        fontWeight: FontWeight.w600,
                         color: AppWidgetSizer.greycolor,
                       ),
                     ),
                     isExpanded: true,
+                    iconDisabledColor: Colors.grey,
+
                     iconSize: 20.sp,
                     icon: const Icon(Icons.keyboard_arrow_down_rounded),
                     underline: const SizedBox(),
@@ -503,7 +509,7 @@ class _ToolspageState extends State<Toolspage> {
                       : null,
 
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey.shade900,
+                    backgroundColor: searchBarColor,
                     padding: EdgeInsets.symmetric(
                       horizontal: 5.w,
                       vertical: 1.h,
@@ -519,14 +525,13 @@ class _ToolspageState extends State<Toolspage> {
                         "Convert",
                         style: GoogleFonts.inter(
                           fontWeight: FontWeight.w500,
-                          color: AppWidgetSizer.greycolor,
-                          fontSize: 16.sp,
+                          color: Colors.white,
+                          fontSize: 15.sp,
                         ),
                       ),
-                      SizedBox(width: 2.w),
+                      SizedBox(width: 3.w),
                       const ImageIcon(
                         AssetImage("assets/image/convert_icon.png"),
-                        color: Colors.white,
                       ),
                     ],
                   ),
@@ -540,8 +545,8 @@ class _ToolspageState extends State<Toolspage> {
                 padding: EdgeInsets.only(left: 4.w, top: 0.5.h),
                 child: Text(
                   "Converter Tools",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w600,
                     color: AppWidgetSizer.greycolor,
                     fontSize: appsizer.textsize(),
                   ),
@@ -552,10 +557,10 @@ class _ToolspageState extends State<Toolspage> {
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(
                   "Future Tools",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w600,
                     color: AppWidgetSizer.greycolor,
-                    fontSize: 16.sp,
+                    fontSize: appsizer.textsize(),
                   ),
                 ),
               ),
@@ -605,9 +610,8 @@ class _ToolspageState extends State<Toolspage> {
 
                                   Text(
                                     item["title"],
-                                    style: TextStyle(
-                                      fontSize: _appWidgetSizer
-                                          .settingsDescSize(),
+                                    style: GoogleFonts.inter(
+                                      fontSize: 14.sp,
                                       color: AppWidgetSizer.greycolor,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -628,10 +632,10 @@ class _ToolspageState extends State<Toolspage> {
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(
                   "Future Tools",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w600,
                     color: AppWidgetSizer.greycolor,
-                    fontSize: 16.sp,
+                    fontSize: appsizer.textsize(),
                   ),
                 ),
               ),
@@ -648,8 +652,8 @@ class _ToolspageState extends State<Toolspage> {
                         Image.asset(list["icon"], scale: 4),
                         Text(
                           list["title"],
-                          style: TextStyle(
-                            fontSize: _appWidgetSizer.settingsDescSize(),
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
                             color: AppWidgetSizer.greycolor,
                             fontWeight: FontWeight.bold,
                           ),
@@ -671,10 +675,10 @@ class _ToolspageState extends State<Toolspage> {
                 padding: EdgeInsets.only(left: 4.w),
                 child: Text(
                   "Other Tools",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w600,
                     color: AppWidgetSizer.greycolor,
-                    fontSize: 16.sp,
+                    fontSize: appsizer.textsize(),
                   ),
                 ),
               ),
@@ -693,8 +697,8 @@ class _ToolspageState extends State<Toolspage> {
                         listviewitems.othertoolsdata["icon"][index],
                         Text(
                           listviewitems.othertoolsdata["Desc"][index],
-                          style: TextStyle(
-                            fontSize: _appWidgetSizer.settingsDescSize(),
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
                             color: AppWidgetSizer.greycolor,
                             fontWeight: FontWeight.bold,
                           ),
