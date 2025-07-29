@@ -1,41 +1,42 @@
+import 'package:all_example/helper/assets_strings.dart';
 import 'package:flutter/material.dart';
 
 class Listviewitems extends SearchViewListView {
   // toolspage Data
 
   List<Map<String, dynamic>> inputFormatData = [
-    {"icon": "pdf_component.png", "title": "PDF File", "type": "PDF"},
-    {"icon": "word_component.png", "title": "Word File", "type": "Word"},
-    {"icon": "img_component.png", "title": "IMG'S File", "type": "IMG"},
-    {"icon": "ppt_component.png", "title": "PPT File", "type": "PPT"},
-    {"icon": "excel_component.png", "title": "Excel File", "type": "Excel"},
+    {"icon": pdfComponent, "title": "PDF File", "type": "PDF"},
+    {"icon": wordComponent, "title": "Word File", "type": "Word"},
+    {"icon": imgComponent, "title": "IMG'S File", "type": "IMG"},
+    {"icon": pptComponent, "title": "PPT File", "type": "PPT"},
+    {"icon": excelComponent, "title": "Excel File", "type": "Excel"},
   ];
 
   List<Map<String, dynamic>> outputFormatData = [
-    {"icon": "pdf_component.png", "title": "PDF File", "type": "PDF"},
-    {"icon": "word_component.png", "title": "Word File", "type": "Word"},
-    {"icon": "img_component.png", "title": "IMG'S File", "type": "IMG"},
-    {"icon": "ppt_component.png", "title": "PPT File", "type": "PPT"},
-    {"icon": "excel_component.png", "title": "Excel File", "type": "Excel"},
+    {"icon": pdfComponent, "title": "PDF File", "type": "PDF"},
+    {"icon": wordComponent, "title": "Word File", "type": "Word"},
+    {"icon": imgComponent, "title": "IMG'S File", "type": "IMG"},
+    {"icon": pptComponent, "title": "PPT File", "type": "PPT"},
+    {"icon": excelComponent, "title": "Excel File", "type": "Excel"},
   ];
   List<Map<String, dynamic>> featureToolsData = [
-    {"icon": "pdf_converter.png", "title": "Convert to PDF", "type": "PDF"},
+    {"icon": pdfConverter, "title": "Convert to PDF", "type": "PDF"},
 
-    {"icon": "txt_converter.png", "title": "Convert to Text", "type": "TXT"},
+    {"icon": textConverter, "title": "Convert to Text", "type": "TXT"},
 
-    {"icon": "imgg_converter.png", "title": "Convert to Image", "type": "IMG"},
+    {"icon": imgConverter, "title": "Convert to Image", "type": "IMG"},
   ];
 
   List<Map<String, dynamic>> featureToolsData2 = [
-    {"icon": "word_to_pdf.png", "title": "Word to PDF", "type": "W to P"},
+    {"icon": wordToPdf, "title": "Word to PDF", "type": "W to P"},
 
-    {"icon": "pdf_to_txt.png", "title": "PDF To Text", "type": "P to T"},
-    {"icon": "pdf_to_img.png", "title": "PDF To Image", "type": "P to I"},
-    {"icon": "img_to_pdf.png", "title": "Image to PDF", "type": "I to P"},
+    {"icon": pdfToText, "title": "PDF To Text", "type": "P to T"},
+    {"icon": pdfToImage, "title": "PDF To Image", "type": "P to I"},
+    {"icon": imageToPdf, "title": "Image to PDF", "type": "I to P"},
   ];
 
   Map<String, dynamic> othertoolsdata = {
-    "icon": [Image.asset("assets/merge_pdf_files.png", scale: 4)],
+    "icon": [Image.asset("assets/image/merge_pdf_files.png", scale: 4)],
 
     "Desc": ["Merge PDF Files"],
   };
@@ -44,21 +45,21 @@ class Listviewitems extends SearchViewListView {
 class SearchViewListView extends DrawerlistItems {
   Map<String, dynamic> searchviewData = {
     "icon": [
-      Image.asset("assets/pdf.png", scale: 4),
-      Image.asset("assets/ppt.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/image/pdf.png", scale: 4),
+      Image.asset("assets/image/ppt.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
     ],
 
     "Title": [
@@ -126,16 +127,16 @@ class DrawerlistItems extends HomeRecentFiles {
 class HomeRecentFiles extends HomeFolderList {
   Map<String, dynamic> homeRecentFilesList = {
     "icon": [
-      Image.asset("assets/pdf.png", scale: 4),
-      Image.asset("assets/ppt.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
-      Image.asset("assets/ms_word.png", scale: 4),
+      Image.asset("assets/image/pdf.png", scale: 4),
+      Image.asset("assets/image/ppt.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
+      Image.asset("assets/image/ms_word.png", scale: 4),
     ],
 
     "Desc": [
@@ -156,11 +157,11 @@ class HomeRecentFiles extends HomeFolderList {
 class HomeFolderList {
   Map<String, dynamic> homeFolderList = {
     "icon": [
-      Image.asset("assets/word_files.png", scale: 4),
-      Image.asset("assets/pdf_files.png", scale: 4),
-      Image.asset("assets/ppt_files.png", scale: 4),
-      Image.asset("assets/scaned_files.png", scale: 4),
-      Image.asset("assets/favourite_files.png", scale: 4),
+      Image.asset("assets/image/word_files.png", scale: 4),
+      Image.asset("assets/image/pdf_files.png", scale: 4),
+      Image.asset("assets/image/ppt_files.png", scale: 4),
+      Image.asset("assets/image/scaned_files.png", scale: 4),
+      Image.asset("assets/image/favourite_files.png", scale: 4),
     ],
     "title": [
       "Word File",

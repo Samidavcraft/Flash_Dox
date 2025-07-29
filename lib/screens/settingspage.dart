@@ -1,3 +1,4 @@
+import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -21,7 +22,7 @@ class _SettingspageState extends State<Settingspage> {
         title: Row(
           children: [
             Image.asset(
-              'assets/flash_icon.png',
+              appBarIcon,
               width: appsizer.appBarIconSize(),
               height: appsizer.appBarIconSize(),
             ),

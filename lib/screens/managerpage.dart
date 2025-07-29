@@ -1,3 +1,4 @@
+import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _ManagerpageState extends State<Managerpage> {
             child: Row(
               children: [
                 Image.asset(
-                  'assets/flash_icon.png',
+                  appBarIcon,
                   width: appsizer.appBarIconSize(),
                   height: appsizer.appBarIconSize(),
                 ),

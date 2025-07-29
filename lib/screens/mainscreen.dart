@@ -1,3 +1,4 @@
+import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/screens/homepage.dart';
 import 'package:all_example/screens/managerpage.dart';
 import 'package:all_example/screens/settingspage.dart';
@@ -31,22 +32,22 @@ class _MainscreenState extends State<Mainscreen> {
         currentIndex: currentItem,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ImageIcon(AssetImage(home)),
             label: "Home",
             tooltip: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined),
+            icon: ImageIcon(AssetImage(tools)),
             label: "Tools",
             tooltip: "Tools",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.drive_file_move_rtl_outlined),
+            icon: ImageIcon(AssetImage(manager)),
             label: "Manager",
             tooltip: "Manager",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
+            icon: ImageIcon(AssetImage(settings)),
             label: "Settings",
             tooltip: "Settings",
           ),

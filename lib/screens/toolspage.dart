@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/helper/textDectector.dart';
 import 'package:all_example/screens/helper_screen/futuretools_Screen.dart';
@@ -55,7 +56,7 @@ class _ToolspageState extends State<Toolspage> {
           child: Row(
             children: [
               Image.asset(
-                'assets/flash_icon.png',
+                appBarIcon,
                 width: appsizer.appBarIconSize(),
                 height: appsizer.appBarIconSize(),
               ),
@@ -580,9 +581,8 @@ class _ToolspageState extends State<Toolspage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => FuturetoolsScreen(),
-                                settings: RouteSettings(
-                                  arguments: selectedItem,
+                                builder: (context) => FuturetoolsScreen(
+                                  selectedItem: selectedItem,
                                 ),
                               ),
                             );
@@ -710,7 +710,7 @@ class _ToolspageState extends State<Toolspage> {
               // for testing Text Detector
               scannedText.isEmpty
                   ? const Text("Text Not Detected")
-                  : Text(scannedText),
+                  : SelectableText(scannedText),
             ],
           ),
         ),

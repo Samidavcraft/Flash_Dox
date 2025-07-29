@@ -1,4 +1,6 @@
+import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
+import 'package:all_example/themes/appwidget_themes.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,18 +30,12 @@ class _HomepageState extends State<Homepage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'assets/flash_icon.png',
+                appBarIcon,
                 width: appBar.appBarIconSize(),
                 height: appBar.appBarIconSize(),
               ),
               SizedBox(width: 1.w),
-              Text(
-                "Flash Dox",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: appBar.appBarTextSize(),
-                ),
-              ),
+              Image.asset(appBarText, scale: 1),
             ],
           ),
         ),
@@ -108,38 +104,28 @@ class _HomepageState extends State<Homepage> {
         child: Column(
           children: [
             DrawerHeader(
+              decoration: BoxDecoration(color: drawerHeader),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: [
-                      Image.asset(
-                        'assets/flash_icon.png',
-                        width: appBar.appBarIconSize(),
-                        height: appBar.appBarIconSize(),
-                      ),
-
-                      Text(
-                        "Flash Dox",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: appBar.appBarTextSize(),
-                        ),
-                      ),
-                    ],
+                    children: [Image.asset(drawerIcon, scale: 10.sp)],
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
 
                     children: [
-                      Text(
-                        "Manager & Viewer",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: appBar.settingsTitleSize(),
+                      Container(
+                        child: Text(
+                          "Manager & Viewer",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.sp,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],
@@ -176,6 +162,10 @@ class _HomepageState extends State<Homepage> {
                   );
                 },
               ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 5.h),
+              child: Image.asset(aiSiblinks, scale: 4.sp),
             ),
           ],
         ),
