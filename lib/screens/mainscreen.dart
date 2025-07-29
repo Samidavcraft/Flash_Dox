@@ -4,6 +4,7 @@ import 'package:all_example/screens/managerpage.dart';
 import 'package:all_example/screens/settingspage.dart';
 import 'package:all_example/screens/toolspage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Mainscreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _MainscreenState extends State<Mainscreen> {
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(home)),
             label: "Home",
+
             tooltip: "Home",
           ),
           BottomNavigationBarItem(
@@ -49,12 +51,14 @@ class _MainscreenState extends State<Mainscreen> {
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage(settings)),
             label: "Settings",
+
             tooltip: "Settings",
           ),
         ],
         selectedItemColor: Colors.white,
         showUnselectedLabels: true,
-
+        selectedLabelStyle: GoogleFonts.inter(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.inter(fontWeight: FontWeight.bold),
         elevation: 4,
         iconSize: 22.sp,
         onTap: tapped,

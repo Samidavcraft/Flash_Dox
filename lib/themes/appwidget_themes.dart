@@ -8,3 +8,4 @@ const Color fileColor = Color(0xFF2B2B2B);
 const Color importFileFirst = Color(0xFF1C191A);
 const Color converterTxt = Color(0xFFFFFFFF80);
 const Color appBarColor = Color(0xFF1C191A);
+const Color importFileTxt = Color(0xFF545454);

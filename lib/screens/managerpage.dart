@@ -2,6 +2,7 @@ import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Managerpage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ManagerpageState extends State<Managerpage> {
                 SizedBox(width: 1.w),
                 Text(
                   "Manager",
-                  style: TextStyle(
+                  style: GoogleFonts.inter(
                     fontWeight: FontWeight.bold,
                     fontSize: appsizer.appBarTextSize(),
                   ),

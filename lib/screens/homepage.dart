@@ -133,7 +133,6 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-
             Expanded(
               child: ListView.builder(
                 itemCount: listviewitems.drawerItems["icon"].length,
@@ -164,7 +163,7 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 5.h),
+              margin: EdgeInsets.only(bottom: 2.h),
               child: Image.asset(aiSiblinks, scale: 4.sp),
             ),
           ],

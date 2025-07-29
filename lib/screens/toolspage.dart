@@ -7,6 +7,7 @@ import 'package:all_example/screens/helper_screen/futuretools_Screen.dart';
 
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -63,7 +64,7 @@ class _ToolspageState extends State<Toolspage> {
               SizedBox(width: 1.w),
               Text(
                 "Converter",
-                style: TextStyle(
+                style: GoogleFonts.inter(
                   fontWeight: FontWeight.bold,
                   fontSize: appsizer.appBarTextSize(),
                 ),
@@ -353,14 +354,15 @@ class _ToolspageState extends State<Toolspage> {
                           children: [
                             Text(
                               "Import",
-                              style: TextStyle(
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w500,
                                 color: AppWidgetSizer.greycolor,
-                                fontSize: 15.sp,
+                                fontSize: 16.sp,
                               ),
                             ),
                             SizedBox(width: 1.w),
-                            Icon(
-                              Icons.download_outlined,
+                            ImageIcon(
+                              AssetImage("assets/image/import.png"),
                               color: AppWidgetSizer.greycolor,
                               size: 20.sp,
                             ),
@@ -513,14 +515,15 @@ class _ToolspageState extends State<Toolspage> {
                     children: [
                       Text(
                         "Convert",
-                        style: TextStyle(
+                        style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w500,
                           color: AppWidgetSizer.greycolor,
                           fontSize: 16.sp,
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      const Icon(
-                        Icons.change_circle_rounded,
+                      const ImageIcon(
+                        AssetImage("assets/image/convert_icon.png"),
                         color: Colors.white,
                       ),
                     ],

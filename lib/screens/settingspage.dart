@@ -1,6 +1,7 @@
 import 'package:all_example/helper/assets_strings.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Settingspage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SettingspageState extends State<Settingspage> {
             SizedBox(width: 1.w),
             Text(
               "Settings",
-              style: TextStyle(
+              style: GoogleFonts.inter(
                 fontWeight: FontWeight.bold,
                 fontSize: appsizer.appBarTextSize(),
               ),
