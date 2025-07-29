@@ -162,7 +162,9 @@ class _ToolspageState extends State<Toolspage> {
                                       SizedBox(width: 3.w),
                                       Text(
                                         value["title"],
-                                        style: TextStyle(fontSize: 16.sp),
+                                        style: GoogleFonts.inter(
+                                          fontSize: 16.sp,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -421,7 +423,7 @@ class _ToolspageState extends State<Toolspage> {
                                 SizedBox(width: 3.w),
                                 Text(
                                   value["title"],
-                                  style: TextStyle(fontSize: 16.sp),
+                                  style: GoogleFonts.inter(fontSize: 16.sp),
                                 ),
                               ],
                             ),

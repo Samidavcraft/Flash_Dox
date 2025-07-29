@@ -1,5 +1,6 @@
 import 'package:all_example/helper/assets_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Listviewitems extends SearchViewListView {
   // toolspage Data
@@ -103,13 +104,13 @@ class SearchViewListView extends DrawerlistItems {
 class DrawerlistItems extends HomeRecentFiles {
   Map<String, dynamic> drawerItems = {
     "icon": [
-      Icon(Icons.home),
-      Icon(Icons.history),
-      Icon(Icons.folder),
-      Icon(Icons.file_copy),
-      Icon(Icons.recycling),
-      Icon(Icons.settings),
-      Icon(Icons.warning),
+      ImageIcon(AssetImage(home), size: 20.sp),
+      Icon(Icons.history, size: 20.sp),
+      ImageIcon(AssetImage(allFiles), size: 20.sp),
+      ImageIcon(AssetImage(manager), size: 20.sp),
+      ImageIcon(AssetImage(trashBin), size: 20.sp),
+      ImageIcon(AssetImage(settings), size: 20.sp),
+      ImageIcon(AssetImage(aboutUs), size: 20.sp),
     ],
 
     "title": [

@@ -3,6 +3,7 @@ import 'package:all_example/listviewItems/listviewItems.dart';
 import 'package:all_example/themes/appwidget_themes.dart';
 import 'package:all_example/themes/textsize.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -155,7 +156,9 @@ class _HomepageState extends State<Homepage> {
                       leading: listviewitems.drawerItems["icon"][index],
                       title: Text(
                         listviewitems.drawerItems["title"][index],
-                        style: TextStyle(fontSize: appBar.settingsTitleSize()),
+                        style: GoogleFonts.inter(
+                          fontSize: appBar.settingsTitleSize(),
+                        ),
                       ),
                     ),
                   );
@@ -185,7 +188,7 @@ class _HomepageState extends State<Homepage> {
                       margin: EdgeInsets.only(left: 2.w),
                       child: Text(
                         "Search",
-                        style: TextStyle(
+                        style: GoogleFonts.inter(
                           fontSize: 17.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

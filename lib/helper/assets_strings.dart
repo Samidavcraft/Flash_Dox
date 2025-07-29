@@ -21,11 +21,14 @@ String imageToPdf = "assets/image/img_to_pdf.png";
 String appBarIcon = "assets/image/flash_icon.png";
 String appBarText = "assets/image/flash_dox_txt.png";
 
-// Bottom Navigation Bar
+// Bottom Navigation Bar and Drawer
 String home = "assets/image/home.png";
 String tools = "assets/image/feature_tools.png";
 String manager = "assets/image/manager.png";
 String settings = "assets/image/settings.png";
+String allFiles = "assets/image/all_files.png";
+String trashBin = "assets/image/trash_bin.png";
+String aboutUs = "assets/image/about_us.png";
 
 // drawer Icon
 
