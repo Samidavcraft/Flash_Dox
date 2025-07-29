@@ -54,8 +54,8 @@ class _SettingspageState extends State<Settingspage> {
             margin: EdgeInsets.only(top: 4.h),
             child: Text(
               "SIGN UP WITH",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w600,
                 color: Colors.white,
                 fontSize: appsizer.textsize(),
               ),
