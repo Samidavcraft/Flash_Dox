@@ -67,7 +67,7 @@ class _HomepageState extends State<Homepage> {
                       child: Row(
                         children: [
                           Image.asset(
-                            'assets/flash_icon.png',
+                            appBarIcon,
                             width: appBar.appBarIconSize(),
                             height: appBar.appBarIconSize(),
                           ),
@@ -363,10 +363,10 @@ class _HomepageState extends State<Homepage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "No Recent File!",
-                          style: TextStyle(
+                          "Recent Files not Found!",
+                          style: GoogleFonts.inter(
                             fontSize: appBar.settingsTitleSize(),
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
