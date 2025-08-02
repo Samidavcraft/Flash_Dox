@@ -207,7 +207,7 @@ class _HomepageState extends State<Homepage> {
                             isScrollControlled: true,
                             backgroundColor: Colors.white,
                             shape: BeveledRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.zero,
+                              borderRadius: BorderRadius.circular(0),
                             ),
                             context: (context),
                             builder: (BuildContext context) {
@@ -228,6 +228,7 @@ class _HomepageState extends State<Homepage> {
                                         fontSize: appBar.settingsTitleSize(),
                                       ),
                                       decoration: InputDecoration(
+                                        hintText: 'Search Here',
                                         border: OutlineInputBorder(
                                           borderSide: BorderSide.none,
                                           borderRadius: BorderRadius.circular(
@@ -240,14 +241,6 @@ class _HomepageState extends State<Homepage> {
                                           left: 2.w,
                                         ),
                                         filled: true,
-                                        hint: Text(
-                                          "Search Here",
-                                          style: GoogleFonts.inter(
-                                            fontSize: appBar
-                                                .settingsTitleSize(),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -264,9 +257,10 @@ class _HomepageState extends State<Homepage> {
 
                                     Expanded(
                                       child: ListView.builder(
-                                        itemCount: listviewitems
-                                            .searchviewData["icon"]
-                                            .length,
+                                        itemCount:
+                                            listviewitems
+                                                .searchviewData["icon"]
+                                                .length,
                                         itemBuilder: (context, index) {
                                           return InkWell(
                                             onTap: () {
@@ -289,8 +283,9 @@ class _HomepageState extends State<Homepage> {
                                               );
                                             },
                                             child: ListTile(
-                                              leading: listviewitems
-                                                  .searchviewData["icon"][index],
+                                              leading:
+                                                  listviewitems
+                                                      .searchviewData["icon"][index],
                                               title: Text(
                                                 listviewitems
                                                     .searchviewData["Title"][index],
@@ -360,82 +355,79 @@ class _HomepageState extends State<Homepage> {
                       (listviewitems.homeRecentFilesList["Desc"] as List)
                           .isEmpty
                   ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Recent Files not Found!",
-                          style: GoogleFonts.inter(
-                            fontSize: appBar.settingsTitleSize(),
-                            fontWeight: FontWeight.w500,
-                          ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Recent Files not Found!",
+                        style: GoogleFonts.inter(
+                          fontSize: appBar.settingsTitleSize(),
+                          fontWeight: FontWeight.w500,
                         ),
-                      ],
-                    )
+                      ),
+                    ],
+                  )
                   : SizedBox(
-                      width: 100.w,
-                      height: 25.w,
-                      child: Center(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth:
-                                listviewitems
-                                    .homeRecentFilesList["icon"]
-                                    .length *
-                                25.w,
-                          ),
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
+                    width: 100.w,
+                    height: 25.w,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth:
+                              listviewitems.homeRecentFilesList["icon"].length *
+                              25.w,
+                        ),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
 
-                            itemCount: listviewitems
-                                .homeRecentFilesList["icon"]
-                                .length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 4.w),
-                                child: InkWell(
-                                  onTap: () {
-                                    // for testing
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        duration: Duration(milliseconds: 2000),
-                                        backgroundColor: Colors.black,
-                                        content: Text(
-                                          "Clicked ${listviewitems.homeFolderList["title"][index]}",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+                          itemCount:
+                              listviewitems.homeRecentFilesList["icon"].length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4.w),
+                              child: InkWell(
+                                onTap: () {
+                                  // for testing
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      duration: Duration(milliseconds: 2000),
+                                      backgroundColor: Colors.black,
+                                      content: Text(
+                                        "Clicked ${listviewitems.homeFolderList["title"][index]}",
+                                        style: TextStyle(color: Colors.white),
                                       ),
-                                    );
-                                  },
-                                  child: SizedBox(
-                                    width: 17.w,
-
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        listviewitems
-                                            .homeRecentFilesList["icon"][index],
-
-                                        Text(
-                                          listviewitems
-                                              .homeRecentFilesList["Desc"][index],
-                                          style: GoogleFonts.inter(
-                                            fontSize: 14.sp,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
                                     ),
+                                  );
+                                },
+                                child: SizedBox(
+                                  width: 17.w,
+
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      listviewitems
+                                          .homeRecentFilesList["icon"][index],
+
+                                      Text(
+                                        listviewitems
+                                            .homeRecentFilesList["Desc"][index],
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
+                  ),
               Divider(height: 1.h),
               Container(
                 margin: EdgeInsets.only(left: 5.w, top: 1.h),
